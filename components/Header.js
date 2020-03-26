@@ -1,20 +1,10 @@
-import { useState } from "react";
 import NextLink from "next/link";
+import Searchbar from "./Searchbar";
 import Account from "./Account";
 
-import {
-  Flex,
-  Link,
-  InputGroup,
-  Input,
-  InputLeftElement,
-  Icon
-} from "@chakra-ui/core";
+import { Flex, Link } from "@chakra-ui/core";
 
 const Header = ({ server }) => {
-  const [value, setValue] = useState("");
-  const handleOnChange = ({ target }) => setValue(target.value);
-
   return (
     <Flex
       as="header"
@@ -23,29 +13,25 @@ const Header = ({ server }) => {
       bg="white"
       height="100px"
       px="2rem"
-      borderBottom="1px solid gray"
+      border="1px"
+      borderStyle="solid"
+      borderColor="background"
     >
       <Flex as="div" align="center">
         <NextLink href="/">
-          <Link w="300px">
-            {server ? server : "Currently not on a server."}
+          <Link
+            w="300px"
+            fontSize="3xl"
+            fontWeight="bold"
+            color="dark"
+            letterSpacing={1.25}
+            textDecoration="none"
+          >
+            {server ? server : "DiscordFAQ"}
           </Link>
         </NextLink>
-
-        <InputGroup border="none">
-          <InputLeftElement
-            children={<Icon name="search" color="gray.300" />}
-          />
-          <Input
-            type="search"
-            placeholder="Looking for an answer?"
-            border="none"
-            value={value}
-            onChange={handleOnChange}
-          />
-        </InputGroup>
+        <Searchbar placeholder="Looking for an answer?" />
       </Flex>
-
       <Account />
     </Flex>
   );

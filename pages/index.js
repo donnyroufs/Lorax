@@ -1,15 +1,10 @@
-// import { CSSReset } from '@chakra-ui/core';
-import { Layout, Header, Navbar } from "../components/index";
-
+import { Layout, Card } from "../components/index";
+import { Flex } from "@chakra-ui/core";
 const Home = () => (
-  <Layout title="questions">
-    <Header />
-    <Navbar />
-    <style jsx global>{`
-      body {
-        margin: 0;
-      }
-    `}</style>
+  <Layout>
+    <Flex p="2rem">
+      <Card />
+    </Flex>
   </Layout>
 );
 
