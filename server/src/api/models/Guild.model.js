@@ -2,7 +2,8 @@ export default (sequelize, DataTypes) => {
   const Guild = sequelize.define("Guild", {
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     avatar: {
       type: DataTypes.STRING

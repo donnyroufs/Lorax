@@ -1,10 +1,10 @@
 import Controller from "./Controller";
 import models from "../models/index";
 
-class UserController extends Controller {
+class AnswerController extends Controller {
   constructor(model) {
     super(model);
   }
 }
 
-export default new UserController(models.user);
+export default new AnswerController(models.answer);

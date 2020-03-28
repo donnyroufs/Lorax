@@ -5,8 +5,8 @@ import { loadCommands } from "./utils/loaders";
 import handleCommands from "./utils/handleCommands";
 
 (async () => {
-  await server.start();
   await discord.start();
+  await server.start();
 
   // Connects the database and syncs the models.
   models.sequelize.sync();
