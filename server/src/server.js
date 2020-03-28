@@ -1,5 +1,6 @@
 import "dotenv/config";
-import { server, database, discord } from "./config/index";
+import models from "./api/models/index";
+import { server, discord } from "./config/index";
 import { loadCommands } from "./utils/loaders";
 import handleCommands from "./utils/handleCommands";
 
@@ -7,12 +8,13 @@ import handleCommands from "./utils/handleCommands";
   await server.start();
   await discord.start();
 
+  // Connects the database and syncs the models.
+  models.sequelize.sync();
+
   await loadCommands(discord.client);
 
   discord.client.on("message", async message => {
     if (message.author.bot) return;
     await handleCommands(discord.client, message);
   });
-
-  await database.connect();
 })();
