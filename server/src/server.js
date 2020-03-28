@@ -1,15 +1,15 @@
 import "dotenv/config";
 import { discord, server } from "./config/index";
-import commandHandler from "./handlers/command.handler";
+import { loadCommands } from "./utils/loaders";
+import handleCommands from "./utils/handleCommands";
 
 (async () => {
   await server.start();
   await discord.start();
+  await loadCommands(discord.client);
 
   discord.client.on("message", async message => {
     if (message.author.bot) return;
-
-    // Listens to messages, and deals with them based on given command.
-    await commandHandler.listen(message);
+    await handleCommands(discord.client, message);
   });
 })();

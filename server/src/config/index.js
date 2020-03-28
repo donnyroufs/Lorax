@@ -1,5 +1,5 @@
 import express from "express";
-import Discord from "discord.js";
+import Discord, { Collection } from "discord.js";
 
 const discordConfig = {
   prefix: "!",
@@ -8,9 +8,9 @@ const discordConfig = {
 
 export const discord = {
   client: new Discord.Client(),
-  commands: ["question"],
   init() {
     this.client.config = discordConfig;
+    this.client.commands = new Collection();
   },
   async start() {
     this.init();
