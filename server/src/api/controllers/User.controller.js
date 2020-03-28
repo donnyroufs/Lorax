@@ -7,4 +7,4 @@ class UserController extends Controller {
   }
 }
 
-export default new UserController(models.user);
+export default new UserController(models.User);

@@ -9,6 +9,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
+  Guild.associate = models => {};
 
   return Guild;
 };
