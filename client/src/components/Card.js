@@ -1,4 +1,6 @@
+import React from "react";
 import { Box, Badge, Stack, Flex, Image, Heading } from "@chakra-ui/core";
+
 const Card = () => {
   return (
     <Flex

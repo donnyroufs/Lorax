@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import React from "react";
 import Searchbar from "./Searchbar";
 import Account from "./Account";
 
@@ -18,18 +18,16 @@ const Header = ({ server }) => {
       borderColor="background"
     >
       <Flex as="div" align="center">
-        <NextLink href="/">
-          <Link
-            w="300px"
-            fontSize="3xl"
-            fontWeight="bold"
-            color="dark"
-            letterSpacing={1.25}
-            textDecoration="none"
-          >
-            {server ? server : "DiscordFAQ"}
-          </Link>
-        </NextLink>
+        <Link
+          w="300px"
+          fontSize="3xl"
+          fontWeight="bold"
+          color="dark"
+          letterSpacing={1.25}
+          textDecoration="none"
+        >
+          {server ? server : "DiscordFAQ"}
+        </Link>
         <Searchbar placeholder="Looking for an answer?" />
       </Flex>
       <Account />

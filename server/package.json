@@ -13,6 +13,7 @@
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
+    "axios": "^0.19.2",
     "discord.js": "^12.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

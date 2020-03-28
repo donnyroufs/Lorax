@@ -1,0 +1,21 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans Pro";
+}
+
+a {
+  text-decoration: none;
+}

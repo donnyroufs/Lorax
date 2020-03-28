@@ -1,3 +1,4 @@
+import React from "react";
 import theme from "../theme";
 import { ThemeProvider, Flex, Box } from "@chakra-ui/core";
 import { Header, Navbar } from "./index";
@@ -11,28 +12,6 @@ const Layout = ({ children }) => (
         {children}
       </Flex>
     </Box>
-    <style jsx global>{`
-      *,
-      *::after,
-      *::before {
-        box-sizing: border-box;
-      }
-
-      html,
-      body,
-      #__next {
-        height: 100%;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Source Sans Pro";
-      }
-
-      a {
-        text-decoration: none;
-      }
-    `}</style>
   </ThemeProvider>
 );
 
