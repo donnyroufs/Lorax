@@ -1,14 +1,7 @@
 import "dotenv/config";
-import Discord from "discord.js";
+import { discord, server } from "./config/index";
 
-const client = new Discord.Client();
-
-client.once("ready", () => {
-  console.log("Connected to discord bot...");
-});
-
-client.login(process.env.DISCORD_TOKEN);
-
-client.on("message", message => {
-  console.log(message.content);
-});
+(async () => {
+  await server.start();
+  await discord.start();
+})();
