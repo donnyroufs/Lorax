@@ -7,4 +7,4 @@ class AnswerController extends Controller {
   }
 }
 
-export default new AnswerController(models.answer);
+export default new AnswerController(models.Answer);

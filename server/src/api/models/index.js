@@ -17,15 +17,15 @@ const sequelize = new Sequelize(
 );
 
 const models = {
-  guild: sequelize.import("./Guild.model"),
-  user: sequelize.import("./User.model"),
-  question: sequelize.import("./Question.model"),
-  answer: sequelize.import("./Answer.model")
+  Guild: sequelize.import("./Guild.model"),
+  User: sequelize.import("./User.model"),
+  Question: sequelize.import("./Question.model"),
+  Answer: sequelize.import("./Answer.model")
 };
 
 Object.keys(models).forEach(modelName => {
   if ("associate" in models[modelName]) {
-    models[modelName], associate(models);
+    models[modelName].associate(models);
   }
 });
 

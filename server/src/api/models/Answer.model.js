@@ -5,6 +5,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+  Answer.associate = models => {};
 
   return Answer;
 };

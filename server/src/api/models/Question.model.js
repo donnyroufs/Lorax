@@ -13,6 +13,7 @@ export default (sequelize, DataTypes) => {
       default: 0
     }
   });
+  Question.associate = models => {};
 
   return Question;
 };

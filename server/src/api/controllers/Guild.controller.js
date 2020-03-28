@@ -7,4 +7,4 @@ class GuildController extends Controller {
   }
 }
 
-export default new GuildController(models.guild);
+export default new GuildController(models.Guild);

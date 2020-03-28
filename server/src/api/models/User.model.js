@@ -10,6 +10,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+  User.associate = models => {};
 
   return User;
 };

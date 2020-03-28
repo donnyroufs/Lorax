@@ -7,4 +7,4 @@ class QuestionController extends Controller {
   }
 }
 
-export default new QuestionController(models.question);
+export default new QuestionController(models.Question);
