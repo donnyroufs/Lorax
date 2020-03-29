@@ -5,8 +5,15 @@ import { loadCommands } from "./utils/loaders";
 import handleCommands from "./utils/handleCommands";
 
 (async () => {
-  await discord.start();
   await server.start();
+  await discord.start(() => {
+    discord.client.on("message", async message => {
+      if (message.author.bot) return;
+      await handleCommands(discord.client, message);
+    });
+
+    console.log(`guilds: ${discord.client.guilds.cache.size}`);
+  });
 
   // Connects the database and syncs the models.
   models.sequelize.sync().then(() => {
@@ -20,9 +27,4 @@ import handleCommands from "./utils/handleCommands";
       });
   });
   await loadCommands(discord.client);
-
-  discord.client.on("message", async message => {
-    if (message.author.bot) return;
-    await handleCommands(discord.client, message);
-  });
 })();

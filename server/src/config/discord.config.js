@@ -11,11 +11,12 @@ export default {
     this.client.config = discordConfig;
     this.client.commands = new Collection();
   },
-  async start() {
+  async start(callback) {
     this.init();
+    this.client.login(this.client.config.token);
     this.client.once("ready", () => {
       console.log("Discord bot is up and running...");
+      callback();
     });
-    this.client.login(this.client.config.token);
   }
 };
