@@ -1,4 +1,6 @@
 import React from "react";
+import { useRouteMatch } from "react-router-dom";
+import { Link as ReactLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import {
   Flex,
@@ -12,8 +14,18 @@ import {
 } from "@chakra-ui/core";
 
 const Navbar = () => {
+  // @TODO: Add a slug to the database
+  const match = useRouteMatch("/:id");
   return (
-    <Flex as="nav" w="300px" bg="#fff" h="100%" direction="column">
+    <Flex
+      as="nav"
+      w="300px"
+      maxW="300px"
+      minW="300px"
+      bg="#fff"
+      h="100%"
+      direction="column"
+    >
       <Stack isInline align="center" marginTop="5rem">
         <Box
           as={FaHome}
@@ -29,13 +41,14 @@ const Navbar = () => {
           fontSize="xl"
           margin="0 0 0 .5rem"
         >
-          Menu
+          Home
         </Heading>
       </Stack>
       <List listStyleType="none" w="100%" padding="0">
         <ListItem>
           <PseudoBox
-            as="a"
+            as={ReactLink}
+            to="/"
             display="block"
             _hover={{
               bg: "lightPurple",
@@ -45,50 +58,57 @@ const Navbar = () => {
             p="1rem 3rem"
             cursor="pointer"
           >
-            Home
+            {match && "Go Back"}
+            {!match && "Home"}
           </PseudoBox>
         </ListItem>
-        <ListItem>
-          <PseudoBox
-            as="a"
-            display="block"
-            _hover={{
-              bg: "lightPurple",
-              color: "purple",
-              fontWeight: "bold"
-            }}
-            p="1rem 3rem"
-            cursor="pointer"
-          >
-            Questions
-          </PseudoBox>
-        </ListItem>
-        <ListItem>
-          <PseudoBox
-            as="a"
-            display="block"
-            _hover={{
-              bg: "lightPurple",
-              color: "purple",
-              fontWeight: "bold"
-            }}
-            p="1rem 3rem"
-            cursor="pointer"
-          >
-            Answered
-          </PseudoBox>
-        </ListItem>
+        {match && (
+          <React.Fragment>
+            <ListItem>
+              <PseudoBox
+                as={ReactLink}
+                to="/"
+                display="block"
+                _hover={{
+                  bg: "lightPurple",
+                  color: "purple",
+                  fontWeight: "bold"
+                }}
+                p="1rem 3rem"
+                cursor="pointer"
+              >
+                Questions
+              </PseudoBox>
+            </ListItem>
+            <ListItem>
+              <PseudoBox
+                as="a"
+                display="block"
+                _hover={{
+                  bg: "lightPurple",
+                  color: "purple",
+                  fontWeight: "bold"
+                }}
+                p="1rem 3rem"
+                cursor="pointer"
+              >
+                Answered
+              </PseudoBox>
+            </ListItem>
+          </React.Fragment>
+        )}
       </List>
 
-      <Flex bg="dark" p="1rem" justifyContent="center" marginTop="auto">
-        <Link
-          href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=0&scope=bot"
-          color="white"
-          target="_blank"
-        >
-          Subscribe Bot
-        </Link>
-      </Flex>
+      {!match && (
+        <Flex bg="dark" p="1rem" justifyContent="center" marginTop="auto">
+          <Link
+            href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=0&scope=bot"
+            color="white"
+          >
+            Subscribe Bot
+          </Link>
+        </Flex>
+      )}
     </Flex>
   );
 };
