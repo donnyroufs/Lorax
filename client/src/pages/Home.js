@@ -8,22 +8,10 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Flex
-        marginTop="2rem"
-        w="100%"
-        alignContent="flex-start"
-        justifyContent="center"
-      >
-        <Flex
-          flexWrap="wrap"
-          alignContent="flex-start"
-          width="1300px"
-          justifyContent="space-between"
-        >
-          {guilds.map(guild => (
-            <Card guild={guild} key={guild.id} />
-          ))}
-        </Flex>
+      <Flex m="2rem" flexWrap="wrap" w="100%" alignContent="flex-start">
+        {guilds.map(guild => (
+          <Card guild={guild} key={guild.id} />
+        ))}
       </Flex>
     </React.Fragment>
   );
