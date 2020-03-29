@@ -5,7 +5,12 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  Answer.associate = models => {};
+
+  Answer.associate = models => {
+    Answer.belongsTo(models.User, {
+      as: "User"
+    });
+  };
 
   return Answer;
 };

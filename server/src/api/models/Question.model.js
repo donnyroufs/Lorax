@@ -13,7 +13,13 @@ export default (sequelize, DataTypes) => {
       default: 0
     }
   });
-  Question.associate = models => {};
+  Question.associate = models => {
+    Question.belongsTo(models.User);
+
+    Question.hasMany(models.Answer, {
+      as: "Answers"
+    });
+  };
 
   return Question;
 };
