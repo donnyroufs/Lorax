@@ -9,7 +9,22 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
-  Guild.associate = models => {};
+  Guild.associate = models => {
+    Guild.belongsToMany(models.User, {
+      through: "GuildGroups"
+    });
+
+    Guild.hasMany(models.Question, {
+      as: "Questions"
+    });
+
+    // Guild.belongsToMany(models.User, {
+    //   through: "guildGroups"
+    // });
+    // Guild.belongsToMany(models.Question, {
+    //   through: "guildGroups"
+    // });
+  };
 
   return Guild;
 };

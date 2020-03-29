@@ -10,7 +10,15 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  User.associate = models => {};
+  User.associate = models => {
+    User.belongsToMany(models.Guild, {
+      through: "GuildGroups"
+    });
+
+    User.hasMany(models.Question, {
+      as: "Questions"
+    });
+  };
 
   return User;
 };
