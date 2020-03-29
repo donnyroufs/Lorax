@@ -9,8 +9,16 @@ import handleCommands from "./utils/handleCommands";
   await server.start();
 
   // Connects the database and syncs the models.
-  models.sequelize.sync();
-
+  models.sequelize.sync().then(() => {
+    models.sequelize
+      .authenticate()
+      .then(() => {
+        console.log("Database is up and running...");
+      })
+      .catch(err => {
+        console.error("Unable to connect to the database:", err);
+      });
+  });
   await loadCommands(discord.client);
 
   discord.client.on("message", async message => {
