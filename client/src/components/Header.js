@@ -7,7 +7,7 @@ import Account from "./Account";
 import { Flex, Link } from "@chakra-ui/core";
 
 const Header = () => {
-  const match = useRouteMatch("/:id");
+  const match = useRouteMatch("/:slug");
   const guild = useSelector(state => state.guild.guilds);
 
   return (
@@ -33,14 +33,11 @@ const Header = () => {
         >
           {match &&
             guild
-              .filter(g => g.id === match.params.id)
+              .filter(g => g.slug === match.params.slug)
               .map(guild => guild.name)}
-
           {!match && "Discord Faq"}
-
-          {/* {server ? server : "DiscordFAQ"} */}
         </Link>
-        <Searchbar placeholder="Looking for an answer?" />
+        {match && <Searchbar placeholder="Looking for an answer?" />}
       </Flex>
       <Account />
     </Flex>

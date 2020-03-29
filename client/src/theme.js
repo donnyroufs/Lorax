@@ -20,6 +20,7 @@ export default {
     "6xl": "4rem"
   },
   colors: {
+    ...theme.colors,
     dark: "#5A4F6B",
     purple: "#A264FF",
     lightPurple: "#E9DAFF",

@@ -26,7 +26,7 @@ const Navbar = () => {
       h="100%"
       direction="column"
     >
-      <Stack isInline align="center" marginTop="5rem">
+      <Stack isInline align="center" marginTop="5rem" marginBottom="2rem">
         <Box
           as={FaHome}
           color="dark"
@@ -111,12 +111,19 @@ const Navbar = () => {
       </List>
 
       {!match && (
-        <Flex bg="dark" p="1rem" justifyContent="center" marginTop="auto">
+        <Flex justifyContent="center" marginTop="auto" marginBottom="2rem">
           <Link
-            href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=0&scope=bot"
-            color="white"
+            href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=0&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=bot"
+            color="black"
+            fontWeight="bold"
+            bg="background"
+            p="1rem"
+            width="80%"
+            display="flex"
+            justifyContent="center"
+            textDecoration="none"
           >
-            Subscribe Bot
+            Add Bot
           </Link>
         </Flex>
       )}

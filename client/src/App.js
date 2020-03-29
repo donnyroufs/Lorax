@@ -18,8 +18,8 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/" component={Page.Home} />
-            <Route path="/:id/questions" component={Page.Questions} />
-            <Route path="/:id/answered" component={Page.Answered} />
+            <Route path="/:slug/questions" component={Page.Questions} />
+            <Route path="/:slug/answered" component={Page.Answered} />
           </Switch>
         </Layout>
       </Router>

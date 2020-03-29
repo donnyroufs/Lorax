@@ -3,11 +3,10 @@ import { Link as ReactLink } from "react-router-dom";
 import { Box, Badge, Stack, Flex, Image, Heading } from "@chakra-ui/core";
 
 const Card = ({ guild }) => {
-  // @REFACTOR: Guild.id should be guild.slug
   return (
     <Flex
       as={ReactLink}
-      to={guild.id + "/questions"}
+      to={guild.slug + "/questions"}
       align="center"
       w="400px"
       height="120px"
