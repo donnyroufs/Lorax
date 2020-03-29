@@ -14,6 +14,9 @@ export default (sequelize, DataTypes) => {
     },
     memberCount: {
       type: DataTypes.INTEGER
+    },
+    slug: {
+      type: DataTypes.STRING
     }
   });
   Guild.associate = models => {

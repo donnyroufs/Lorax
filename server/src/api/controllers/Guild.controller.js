@@ -1,4 +1,5 @@
 import Controller from "./Controller";
+import urlSlug from "url-slug";
 import models from "../models/index";
 
 class GuildController extends Controller {
@@ -7,12 +8,15 @@ class GuildController extends Controller {
   }
 
   async _create({ id, name, memberCount }, icon) {
+    const slug = urlSlug(name);
+
     try {
       const data = await this.model.create({
         id,
         name,
         avatar: icon,
-        memberCount
+        memberCount,
+        slug
       });
       return console.log(data);
     } catch (err) {
@@ -21,9 +25,11 @@ class GuildController extends Controller {
   }
 
   async _update({ id, name, memberCount }, icon) {
+    const slug = urlSlug(name);
+
     try {
       const [_, data] = await this.model.update(
-        { name, memberCount, avatar: icon },
+        { name, memberCount, avatar: icon, slug },
         { where: { id: id }, returning: true, plain: true }
       );
       if (data === 0) throw err;
