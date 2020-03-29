@@ -14,9 +14,9 @@ export default message => {
     const command = _command.toLowerCase();
 
     return {
-      client,
+      message,
       command,
-      message: content.join(" ")
+      args: content.join(" ")
     };
   }
 };
