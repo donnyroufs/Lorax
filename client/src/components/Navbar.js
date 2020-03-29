@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
-import { Link as ReactLink } from "react-router-dom";
+import { NavLink as ReactLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import {
   Flex,
@@ -46,8 +46,17 @@ const Navbar = () => {
       </Stack>
       <List listStyleType="none" w="100%" padding="0">
         <ListItem>
-          <PseudoBox
+          <ReactLink
+            to="/"
+            exact={true}
+            className="ducktaped-chakra-react-link"
+          >
+            {match && "Go Back"}
+            {!match && "Home"}
+          </ReactLink>
+          {/* <Link
             as={ReactLink}
+            exact={true}
             to="/"
             display="block"
             _hover={{
@@ -60,14 +69,15 @@ const Navbar = () => {
           >
             {match && "Go Back"}
             {!match && "Home"}
-          </PseudoBox>
+          </Link> */}
         </ListItem>
         {match && (
           <React.Fragment>
             <ListItem>
-              <PseudoBox
+              <Link
                 as={ReactLink}
-                to="/"
+                to="questions"
+                exact={true}
                 display="block"
                 _hover={{
                   bg: "lightPurple",
@@ -78,11 +88,12 @@ const Navbar = () => {
                 cursor="pointer"
               >
                 Questions
-              </PseudoBox>
+              </Link>
             </ListItem>
             <ListItem>
-              <PseudoBox
-                as="a"
+              <Link
+                as={ReactLink}
+                to="answered"
                 display="block"
                 _hover={{
                   bg: "lightPurple",
@@ -93,7 +104,7 @@ const Navbar = () => {
                 cursor="pointer"
               >
                 Answered
-              </PseudoBox>
+              </Link>
             </ListItem>
           </React.Fragment>
         )}

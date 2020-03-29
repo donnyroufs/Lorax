@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {} from "../redux/actions/guild.actions";
 
-const Questions = () => {
+const Answered = () => {
   const dispatch = useDispatch();
   //const guilds = useSelector(state => state.guild.guilds);
 
@@ -12,4 +12,4 @@ const Questions = () => {
   return <React.Fragment>Server</React.Fragment>;
 };
 
-export default Questions;
+export default Answered;

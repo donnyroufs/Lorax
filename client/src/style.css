@@ -19,3 +19,24 @@ body {
 a {
   text-decoration: none;
 }
+
+.active {
+  color: #a264ff;
+  font-weight: bold;
+  background: #e9daff;
+}
+
+.ducktaped-chakra-react-link {
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  text-decoration: none;
+  outline: none;
+  display: block;
+  padding: 1rem 3rem;
+}
+
+.ducktaped-chakra-react-link:hover {
+  color: #a264ff;
+  font-weight: bold;
+  background: #e9daff;
+}

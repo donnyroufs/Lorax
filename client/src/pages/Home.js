@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Card } from "../components/index";
 import { Flex } from "@chakra-ui/core";
 
-import { getGuilds } from "../redux/actions/guild.actions";
-
 const Home = () => {
-  const dispatch = useDispatch();
   const guilds = useSelector(state => state.guild.guilds);
-
-  useEffect(() => {
-    dispatch(getGuilds());
-  }, [dispatch]);
 
   return (
     <React.Fragment>
