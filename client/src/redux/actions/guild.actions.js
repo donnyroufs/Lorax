@@ -14,6 +14,8 @@ export const getGuilds = () => async dispatch => {
 
   dispatch({
     type: SUCCESS_GUILDS,
-    payload: data
+    payload: {
+      data: data.data
+    }
   });
 };

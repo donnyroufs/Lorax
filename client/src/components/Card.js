@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Badge, Stack, Flex, Image, Heading } from "@chakra-ui/core";
 
-const Card = () => {
+const Card = ({ guild }) => {
   return (
     <Flex
       align="center"
       w="400px"
-      maxH="120px"
+      height="120px"
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
@@ -16,9 +16,12 @@ const Card = () => {
       borderColor="borderGray"
       paddingLeft="2rem"
       cursor="pointer"
+      marginRight="2rem"
+      minW="400px"
+      marginBottom="2rem"
     >
       <Image
-        src="https://images.unsplash.com/photo-1547886569-4b9d93ddcef7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"
+        src={guild.avatar}
         alt="server"
         size="75px"
         rounded="8px"
@@ -26,19 +29,19 @@ const Card = () => {
       />
       <Flex direction="column" paddingLeft="2rem">
         <Heading as="h3" size="lg" margin="0 0 .5rem 0">
-          Awesome Server
+          {guild.name}
         </Heading>
         <Stack isInline spacing={4} align="center">
           <Badge
             rounded="full"
-            backgroundColor="dark"
-            p=".5rem"
-            color="white"
+            backgroundColor="lightPurple"
+            p=".5rem .75rem"
+            color="purple"
             fontSize="xs"
           >
-            244 Comments
+            0 Questions
           </Badge>
-          <Box as="span">12024 Users</Box>
+          <Box as="span">{guild.memberCount} Users</Box>
         </Stack>
       </Flex>
     </Flex>

@@ -7,13 +7,18 @@ import { getGuilds } from "../redux/actions/guild.actions";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const guilds = useSelector(state => state.guild.guilds);
+
   useEffect(() => {
     dispatch(getGuilds());
   }, [dispatch]);
+
   return (
     <React.Fragment>
-      <Flex p="2rem">
-        <Card />
+      <Flex p="2rem" flexWrap="wrap" w="100%" alignContent="flex-start">
+        {guilds.map(guild => (
+          <Card guild={guild} key={guild.id} />
+        ))}
       </Flex>
     </React.Fragment>
   );
