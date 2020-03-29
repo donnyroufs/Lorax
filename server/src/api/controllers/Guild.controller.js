@@ -1,11 +1,26 @@
 import Controller from "./Controller";
-import urlSlug from "url-slug";
 import models from "../models/index";
+import response from "../../utils/sendResponse";
+import urlSlug from "url-slug";
 
 class GuildController extends Controller {
   constructor(model) {
     super(model);
   }
+
+  // Difference is that it includes the question association
+  async all(_, res) {
+    try {
+      const data = await this.model.findAll({
+        include: [{ model: models.Question }]
+      });
+
+      response(res, 200, data);
+    } catch (err) {
+      response(res, 404, err, false);
+    }
+  }
+  /* Methods that are not related to the rest api */
 
   async _create({ id, name, memberCount }, icon) {
     const slug = urlSlug(name);

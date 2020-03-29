@@ -8,6 +8,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    channelName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     views: {
       type: DataTypes.INTEGER,
       default: 0
@@ -15,9 +19,9 @@ export default (sequelize, DataTypes) => {
   });
   Question.associate = models => {
     Question.belongsTo(models.User);
+    Question.belongsTo(models.Guild);
 
     Question.hasMany(models.Answer, {
-      as: "Answers",
       onDelete: "cascade"
     });
   };

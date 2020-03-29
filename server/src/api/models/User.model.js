@@ -1,5 +1,9 @@
 export default (sequelize, DataTypes) => {
   const User = sequelize.define("User", {
+    id: {
+      type: DataTypes.BIGINT,
+      primaryKey: true
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,12 +15,7 @@ export default (sequelize, DataTypes) => {
     }
   });
   User.associate = models => {
-    User.belongsToMany(models.Guild, {
-      through: "GuildGroups"
-    });
-
     User.hasMany(models.Question, {
-      as: "Questions",
       onDelete: "cascade"
     });
   };

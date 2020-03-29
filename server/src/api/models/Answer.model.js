@@ -7,9 +7,7 @@ export default (sequelize, DataTypes) => {
   });
 
   Answer.associate = models => {
-    Answer.belongsTo(models.User, {
-      as: "User"
-    });
+    Answer.belongsTo(models.User);
   };
 
   return Answer;
