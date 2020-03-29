@@ -1,5 +1,9 @@
 export default (sequelize, DataTypes) => {
   const Guild = sequelize.define("Guild", {
+    id: {
+      type: DataTypes.BIGINT,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -7,23 +11,20 @@ export default (sequelize, DataTypes) => {
     },
     avatar: {
       type: DataTypes.STRING
+    },
+    memberCount: {
+      type: DataTypes.INTEGER
     }
   });
   Guild.associate = models => {
     Guild.belongsToMany(models.User, {
-      through: "GuildGroups"
+      through: "GuildGroups",
+      onDelete: "cascade"
     });
 
     Guild.hasMany(models.Question, {
       as: "Questions"
     });
-
-    // Guild.belongsToMany(models.User, {
-    //   through: "guildGroups"
-    // });
-    // Guild.belongsToMany(models.Question, {
-    //   through: "guildGroups"
-    // });
   };
 
   return Guild;

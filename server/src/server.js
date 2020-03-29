@@ -3,6 +3,7 @@ import models from "./api/models/index";
 import { server, discord } from "./config/index";
 import { loadCommands } from "./utils/loaders";
 import handleCommands from "./utils/handleCommands";
+import guildController from "./api/controllers/Guild.controller";
 
 (async () => {
   await server.start();
@@ -12,7 +13,16 @@ import handleCommands from "./utils/handleCommands";
       await handleCommands(discord.client, message);
     });
 
-    console.log(`guilds: ${discord.client.guilds.cache.size}`);
+    // Handle new Guilds, Deleted Guilds
+    discord.client.on("guildCreate", async event => {
+      await guildController._create(event);
+    });
+
+    discord.client.on("guildDelete", async event => {
+      await guildController._delete(event);
+    });
+
+    console.log(`Registered Bots: ${discord.client.guilds.cache.size}`);
   });
 
   // Connects the database and syncs the models.

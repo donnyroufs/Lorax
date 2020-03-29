@@ -16,7 +16,8 @@ export default (sequelize, DataTypes) => {
     });
 
     User.hasMany(models.Question, {
-      as: "Questions"
+      as: "Questions",
+      onDelete: "cascade"
     });
   };
 

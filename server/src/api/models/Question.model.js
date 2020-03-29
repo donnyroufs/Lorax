@@ -17,7 +17,8 @@ export default (sequelize, DataTypes) => {
     Question.belongsTo(models.User);
 
     Question.hasMany(models.Answer, {
-      as: "Answers"
+      as: "Answers",
+      onDelete: "cascade"
     });
   };
 
