@@ -1,10 +1,12 @@
 import express from "express";
+import cors from "cors";
 import apiRoutes from "../api/routes/index";
 
 export default {
   app: express(),
   PORT: process.env.NODE_ENV === "prod" ? 5000 : 5000,
   setup() {
+    this.app.use(cors());
     this.middleware();
     this.routes();
   },

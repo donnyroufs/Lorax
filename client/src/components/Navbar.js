@@ -7,7 +7,8 @@ import {
   Heading,
   Stack,
   Box,
-  PseudoBox
+  PseudoBox,
+  Link
 } from "@chakra-ui/core";
 
 const Navbar = () => {
@@ -78,6 +79,16 @@ const Navbar = () => {
           </PseudoBox>
         </ListItem>
       </List>
+
+      <Flex bg="dark" p="1rem" justifyContent="center" marginTop="auto">
+        <Link
+          href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=0&scope=bot"
+          color="white"
+          target="_blank"
+        >
+          Subscribe Bot
+        </Link>
+      </Flex>
     </Flex>
   );
 };
