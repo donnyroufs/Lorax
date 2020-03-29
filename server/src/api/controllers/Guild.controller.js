@@ -6,7 +6,7 @@ class GuildController extends Controller {
     super(model);
   }
 
-  async _create({ id, name, memberCount, icon }) {
+  async _create({ id, name, memberCount }, icon) {
     try {
       const data = await this.model.create({
         id,
@@ -14,6 +14,19 @@ class GuildController extends Controller {
         avatar: icon,
         memberCount
       });
+      return console.log(data);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async _update({ id, name, memberCount }, icon) {
+    try {
+      const [_, data] = await this.model.update(
+        { name, memberCount, avatar: icon },
+        { where: { id: id }, returning: true, plain: true }
+      );
+      if (data === 0) throw err;
       return console.log(data);
     } catch (err) {
       throw err;
@@ -32,6 +45,9 @@ class GuildController extends Controller {
       throw err;
     }
   }
+
+  // @TODO: split generate function
+  generateAvatar(icon) {}
 }
 
 export default new GuildController(models.Guild);

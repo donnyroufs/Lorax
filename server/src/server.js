@@ -15,11 +15,23 @@ import guildController from "./api/controllers/Guild.controller";
 
     // Handle new Guilds, Deleted Guilds
     discord.client.on("guildCreate", async event => {
-      await guildController._create(event);
+      // generate avatar url
+      const icon = event.iconURL({
+        format: "webp"
+      });
+      await guildController._create(event, icon);
     });
 
     discord.client.on("guildDelete", async event => {
       await guildController._delete(event);
+    });
+
+    discord.client.on("guildUpdate", async event => {
+      // @BUG: The update event is "update" behind??.
+      const icon = event.iconURL({
+        format: "webp"
+      });
+      await guildController._update(event, icon);
     });
 
     console.log(`Registered Bots: ${discord.client.guilds.cache.size}`);
