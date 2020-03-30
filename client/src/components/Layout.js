@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
       <Box bg="background" w="100%" h="100%">
         <Header />
         <Navbar />
-        <Flex h="calc(100% - 100px)" marginTop="100px" marginLeft="300px">
+        <Flex h="100%" marginTop="100px" marginLeft="300px">
           {children}
         </Flex>
       </Box>

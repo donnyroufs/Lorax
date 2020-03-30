@@ -21,6 +21,7 @@ const Question = ({ question, setShow }) => {
       flexDir="column"
       justifyContent="space-between"
       onClick={handleOnClick}
+      cursor="pointer"
     >
       <Box as="header">
         <Heading fontSize="1.6rem">{question.title}</Heading>

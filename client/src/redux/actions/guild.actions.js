@@ -13,7 +13,7 @@ export const getGuilds = () => async dispatch => {
     type: GET_GUILDS
   });
 
-  const data = await request("http://localhost:5000/api/guild");
+  const data = await request("/api/guild");
   if (!data.ok)
     dispatch({
       type: ERROR
@@ -34,9 +34,7 @@ export const getGuild = slug => async dispatch => {
     type: GET_GUILD
   });
 
-  const data = await request(
-    `http://localhost:5000/api/guild/overview/${slug}`
-  );
+  const data = await request(`/api/guild/overview/${slug}`);
 
   if (!data.ok || data.data == null) {
     dispatch({

@@ -6,10 +6,6 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-html,
-body {
   height: 100%;
 }
 
@@ -17,6 +13,12 @@ body {
   margin: 0;
   font-family: "Source Sans Pro";
   background: #f6f6f6;
+  height: calc(100% - 100px);
+}
+
+#root,
+.App {
+  height: 100%;
 }
 
 a {
