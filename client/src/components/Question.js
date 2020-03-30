@@ -4,7 +4,7 @@ import { Flex, Box, Heading, Text, Badge } from "@chakra-ui/core";
 const Question = ({ question, setShow }) => {
   const handleOnClick = e => {
     setShow(question.id);
-    console.log(question.id);
+    window.scrollTo(0, 0);
   };
 
   return (

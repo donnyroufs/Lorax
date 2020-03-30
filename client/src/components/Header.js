@@ -12,6 +12,10 @@ const Header = () => {
 
   return (
     <Flex
+      position="fixed"
+      top="0"
+      width="100%"
+      zIndex="5"
       as="header"
       align="center"
       justify="space-between"

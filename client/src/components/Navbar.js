@@ -25,6 +25,8 @@ const Navbar = () => {
       bg="#fff"
       h="100%"
       direction="column"
+      position="fixed"
+      h="calc(100vh - 100px)"
     >
       <Stack isInline align="center" marginTop="5rem" marginBottom="2rem">
         <Box
@@ -130,7 +132,7 @@ const Navbar = () => {
       {!match && (
         <Flex justifyContent="center" marginTop="auto" marginBottom="2rem">
           <Link
-            href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=0&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=bot"
+            href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=bot"
             color="black"
             fontWeight="bold"
             bg="background"
