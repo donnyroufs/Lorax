@@ -1,6 +1,7 @@
 import Controller from "./Controller";
 import models from "../models/index";
 import response from "../../utils/sendResponse";
+import urlSlug from "url-slug";
 
 class QuestionController extends Controller {
   constructor(model) {
@@ -8,10 +9,11 @@ class QuestionController extends Controller {
   }
 
   async create(req, res) {
+    const slug = urlSlug(req.body.title);
     try {
-      // @NOTE: UserId, and GuildId are capitalized!!!
       const data = await this.model.create({
-        ...req.body
+        ...req.body,
+        slug
       });
       response(res, 201, data);
     } catch (err) {
