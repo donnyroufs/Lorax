@@ -1,6 +1,13 @@
 import request from "../../utils/request";
-import { GET_GUILDS, ERROR, SUCCESS_GUILDS } from "../types";
+import {
+  GET_GUILDS,
+  ERROR,
+  SUCCESS_GUILDS,
+  GET_GUILD,
+  SUCCESS_GUILD
+} from "../types";
 
+// @GET: Gets all guilds, with question count.
 export const getGuilds = () => async dispatch => {
   dispatch({
     type: GET_GUILDS
@@ -18,4 +25,29 @@ export const getGuilds = () => async dispatch => {
       data: data.data
     }
   });
+};
+
+// @GET: Gets guild by ID with questions and answers.
+// @NOTE: Should probably refactor this later on to
+export const getGuild = slug => async dispatch => {
+  dispatch({
+    type: GET_GUILD
+  });
+
+  const data = await request(
+    `http://localhost:5000/api/guild/overview/${slug}`
+  );
+
+  if (!data.ok || data.data == null) {
+    dispatch({
+      type: ERROR
+    });
+  } else {
+    dispatch({
+      type: SUCCESS_GUILD,
+      payload: {
+        data: data.data
+      }
+    });
+  }
 };

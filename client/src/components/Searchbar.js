@@ -7,7 +7,7 @@ const Searchbar = ({ placeholder }) => {
   const handleOnChange = ({ target }) => setValue(target.value);
 
   return (
-    <InputGroup border="none">
+    <InputGroup border="none" marginLeft="1rem" width="400px">
       <InputLeftElement children={<Icon name="search" color="gray.300" />} />
       <Input
         type="search"

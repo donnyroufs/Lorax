@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGuild } from "../redux/actions/guild.actions";
 import { SimpleGrid, Flex } from "@chakra-ui/core";
+import { Loader } from "../components";
 
+import { ErrorCard } from "../components/index";
 import Question from "../components/Question";
 
 /*eslint-disable*/
 
-const Questions = () => {
-  const [question, setQuestion] = useState({});
+const Overview = ({ match }) => {
   const dispatch = useDispatch();
-  const { state } = useLocation();
   const questions = useSelector(state => state.guild.questions);
-
-  const handleOnClick = e => {
-    console.log(e);
-  };
+  const loading = useSelector(state => state.guild.loading);
+  const error = useSelector(state => state.guild.error);
 
   useEffect(() => {
-    dispatch(getGuild(state.guildId));
-  }, []);
+    dispatch(getGuild(match.params.slug));
+  }, [match.params.slug]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <ErrorCard code="404" description="Page not found" />;
+  }
 
   return (
     <SimpleGrid minChildWidth="400px" spacing={10} w="100%" m="4rem">
@@ -48,4 +53,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default Overview;

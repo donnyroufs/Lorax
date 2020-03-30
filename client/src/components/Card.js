@@ -6,17 +6,17 @@ const Card = ({ guild }) => {
   return (
     <Flex
       as={ReactLink}
-      to={guild.slug + "/questions"}
+      to={guild.slug + "/overview"}
       align="center"
       w="400px"
       height="120px"
-      borderWidth="1px"
-      rounded="lg"
       overflow="hidden"
       background="white"
       border="1px"
       borderStyle="solid"
+      borderWidth="1px"
       borderColor="borderGray"
+      rounded="lg"
       paddingLeft="2rem"
       cursor="pointer"
       marginRight="2rem"
@@ -36,7 +36,7 @@ const Card = ({ guild }) => {
         </Heading>
         <Stack isInline spacing={4} align="center">
           <Badge
-            rounded="full"
+            rounded="5px"
             backgroundColor="lightPurple"
             p=".5rem .75rem"
             color="purple"
