@@ -6,6 +6,8 @@ import urlSlug from "url-slug";
 class GuildController extends Controller {
   constructor(model) {
     super(model);
+
+    this.getById = this.getById.bind(this);
   }
 
   // Difference is that it includes the question association
@@ -15,6 +17,18 @@ class GuildController extends Controller {
         include: [{ model: models.Question }]
       });
 
+      response(res, 200, data);
+    } catch (err) {
+      response(res, 404, err, false);
+    }
+  }
+
+  async getById(req, res) {
+    const { id } = req.params;
+    try {
+      const data = await this.model.findByPk(id, {
+        include: [{ model: models.Question, include: [models.Answer] }]
+      });
       response(res, 200, data);
     } catch (err) {
       response(res, 404, err, false);

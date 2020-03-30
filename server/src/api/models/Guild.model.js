@@ -20,7 +20,13 @@ export default (sequelize, DataTypes) => {
     }
   });
   Guild.associate = models => {
-    Guild.hasMany(models.Question);
+    models.Guild.hasMany(models.Question, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        type: DataTypes.BIGINT,
+        allowNull: false
+      }
+    });
   };
 
   return Guild;

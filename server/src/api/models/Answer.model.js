@@ -7,7 +7,19 @@ export default (sequelize, DataTypes) => {
   });
 
   Answer.associate = models => {
-    Answer.belongsTo(models.User);
+    models.Answer.belongsTo(models.Question, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    models.Answer.belongsTo(models.User, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
   };
 
   return Answer;

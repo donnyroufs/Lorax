@@ -15,8 +15,17 @@ export default (sequelize, DataTypes) => {
     }
   });
   User.associate = models => {
-    User.hasMany(models.Question, {
-      onDelete: "cascade"
+    models.User.hasMany(models.Question, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    models.User.hasMany(models.Answer, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
     });
   };
 
