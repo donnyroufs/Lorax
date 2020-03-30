@@ -42,7 +42,8 @@ const Card = ({ guild }) => {
             color="purple"
             fontSize="xs"
           >
-            0 Questions
+            {guild.Questions.length}{" "}
+            {guild.Questions.length > 1 ? "Questions" : "Question"}
           </Badge>
           <Box as="span">{guild.memberCount} Users</Box>
         </Stack>
