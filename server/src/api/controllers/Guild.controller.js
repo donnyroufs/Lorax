@@ -8,6 +8,7 @@ class GuildController extends Controller {
     super(model);
 
     this.getById = this.getById.bind(this);
+    this.getOverviewBySlug = this.getOverviewBySlug.bind(this);
   }
 
   // Difference is that it includes the question association
@@ -27,10 +28,29 @@ class GuildController extends Controller {
     const { id } = req.params;
     try {
       const data = await this.model.findByPk(id, {
-        include: [{ model: models.Question, include: [models.Answer] }]
+        include: [
+          { model: models.Question, include: [models.Answer, models.User] }
+        ]
       });
       response(res, 200, data);
     } catch (err) {
+      response(res, 404, err, false);
+    }
+  }
+
+  async getOverviewBySlug(req, res) {
+    const { slug } = req.params;
+    try {
+      const data = await this.model.findOne({
+        where: { slug },
+        include: [
+          { model: models.Question, include: [models.Answer, models.User] }
+        ]
+      });
+
+      response(res, 200, data);
+    } catch (err) {
+      console.log(err);
       response(res, 404, err, false);
     }
   }
