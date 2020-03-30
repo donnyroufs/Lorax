@@ -3,12 +3,25 @@ export default (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    messageUrl: {
+      type: DataTypes.STRING
     }
   });
 
   Answer.associate = models => {
-    Answer.belongsTo(models.User, {
-      as: "User"
+    models.Answer.belongsTo(models.Question, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    models.Answer.belongsTo(models.User, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
     });
   };
 

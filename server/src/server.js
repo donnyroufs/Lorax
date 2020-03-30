@@ -38,7 +38,7 @@ import guildController from "./api/controllers/Guild.controller";
   });
 
   // Connects the database and syncs the models.
-  models.sequelize.sync().then(() => {
+  models.sequelize.sync({ force: false }).then(() => {
     models.sequelize
       .authenticate()
       .then(() => {

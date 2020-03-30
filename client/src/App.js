@@ -5,12 +5,14 @@ import Layout from "./components/Layout";
 import * as Page from "./pages";
 import { getGuilds } from "./redux/actions/guild.actions";
 
+/* eslint-disable */
+
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getGuilds());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="App">
@@ -18,8 +20,11 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/" component={Page.Home} />
-            <Route path="/:slug/questions" component={Page.Questions} />
-            <Route path="/:slug/answered" component={Page.Answered} />
+            <Route exact path="/:slug/overview" component={Page.Overview} />
+            <Route exact path="*" component={Page.Error} />
+            {/* questions and answers do not exist yet */}
+            <Route exact path="/:slug/questions" component={Page.Questions} />
+            <Route exact path="/:slug/answered" component={Page.Answered} />
           </Switch>
         </Layout>
       </Router>

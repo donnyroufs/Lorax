@@ -76,6 +76,23 @@ const Navbar = () => {
             <ListItem>
               <Link
                 as={ReactLink}
+                to="overview"
+                exact={true}
+                display="block"
+                _hover={{
+                  bg: "lightPurple",
+                  color: "purple",
+                  fontWeight: "bold"
+                }}
+                p="1rem 3rem"
+                cursor="pointer"
+              >
+                Overview
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link
+                as={ReactLink}
                 to="questions"
                 exact={true}
                 display="block"
