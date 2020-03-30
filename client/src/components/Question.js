@@ -1,8 +1,9 @@
 import React from "react";
 import { Flex, Box, Heading, Text, Badge } from "@chakra-ui/core";
 
-const Question = ({ question }) => {
+const Question = ({ question, setShow }) => {
   const handleOnClick = e => {
+    setShow(question.id);
     console.log(question.id);
   };
 
