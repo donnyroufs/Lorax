@@ -3,6 +3,9 @@ export default (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    messageUrl: {
+      type: DataTypes.STRING
     }
   });
 

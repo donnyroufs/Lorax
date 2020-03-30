@@ -12,6 +12,9 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    messageUrl: {
+      type: DataTypes.STRING
+    },
     views: {
       type: DataTypes.INTEGER,
       default: 0

@@ -6,8 +6,7 @@ export default (sequelize, DataTypes) => {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     avatar: {
       type: DataTypes.STRING,
