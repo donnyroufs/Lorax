@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import apiRoutes from "../api/routes/index";
 
 export default {
@@ -9,12 +10,19 @@ export default {
     this.app.use(cors());
     this.middleware();
     this.routes();
+    this.serve();
   },
   middleware() {
     this.app.use("/", express.json());
   },
   routes() {
     this.app.use("/api", apiRoutes);
+  },
+  serve() {
+    this.app.use(express.static(path.join("../client/build")));
+    this.app.get("*", (_, res) => {
+      res.sendFile(path.join(__dirname, "../../../client/build/index.html"));
+    });
   },
   async start() {
     this.app.listen(this.PORT, () =>
