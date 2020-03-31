@@ -37,6 +37,22 @@ class GuildController extends Controller {
       response(res, 404, err, false);
     }
   }
+  // try {
+  //   const data = await this.model.findOne({
+  //     where: { slug },
+  //     include: [
+  //       {
+  //         model: models.Question,
+  //         include: [
+  //           {
+  //             model: models.Answer,
+  //             include: [models.User]
+  //           }
+  //         ]
+  //       }
+  //     ],
+  //     order: [[models.Question, "createdAt", "DESC"]]
+  //   });
 
   // @TODO: Add Pagination
   // @NOTE: Doesnt matter for now. - Might implement infinite scroll?
@@ -48,7 +64,14 @@ class GuildController extends Controller {
         include: [
           {
             model: models.Question,
-            include: [models.Answer, models.User]
+            include: [
+              models.Answer,
+              models.User,
+              {
+                model: models.Answer,
+                include: models.User
+              }
+            ]
           }
         ],
         order: [[models.Question, "createdAt", "DESC"]]
