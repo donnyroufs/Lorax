@@ -29,11 +29,11 @@ export const run = async ({ message, command, args }) => {
       .then(msg =>
         setTimeout(() => {
           msg.delete();
-        }, 3000)
+        }, 5000)
       );
 
     message.channel.awaitMessages(filter, { max: 1 }).then(async collected => {
-      message.delete();
+      collected.first().delete();
       const description = collected.first().content;
       if (description === "exit" || description === "return") {
         message.reply("question canceled.");

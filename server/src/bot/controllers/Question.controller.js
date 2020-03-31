@@ -1,18 +1,18 @@
+import Controller from "./Controller";
 import Sequelize from "sequelize";
 import models from "../../api/models/index";
 import urlSlug from "url-slug";
 
 const Op = Sequelize.Op;
 
-class QuestionController {
+class QuestionController extends Controller {
   constructor() {
-    this.models = models;
-    this.urlSlug = urlSlug;
+    super();
   }
 
   async getGuildSlug(id) {
     try {
-      const data = await this.models.Guild.findOne({
+      const data = await models.Guild.findOne({
         where: {
           id
         },
@@ -28,7 +28,7 @@ class QuestionController {
   async createQuestion({ title, ...rest }) {
     const slug = urlSlug(title);
     try {
-      const data = await this.models.Question.create({
+      const data = await models.Question.create({
         ...rest,
         title,
         slug
@@ -45,30 +45,15 @@ class QuestionController {
     }
   }
 
-  async findOrCreate({ id, username }, avatar) {
-    try {
-      const data = await this.models.User.findOrCreate({
-        where: {
-          id,
-          username,
-          avatar
-        }
-      });
-      return data;
-    } catch (err) {
-      throw err;
-    }
-  }
-
   async findQuestions(guildId, question) {
     try {
       // @REFACTOR: Not sure how to implement this as of yet.
       // @RESOURCE: https://medium.com/riipen-engineering/full-text-search-with-sequelize-and-postgresql-3572cb3093e7
-      const data = await this.models.Question.findAll({
+      const data = await models.Question.findAll({
         attributes: ["messageUrl", "title", "slug"],
         include: [
           {
-            model: this.models.Guild,
+            model: models.Guild,
             attributes: ["slug"]
           }
         ],
