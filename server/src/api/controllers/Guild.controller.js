@@ -38,14 +38,20 @@ class GuildController extends Controller {
     }
   }
 
+  // @TODO: Add Pagination
+  // @NOTE: Doesnt matter for now. - Might implement infinite scroll?
   async getOverviewBySlug(req, res) {
     const { slug } = req.params;
     try {
       const data = await this.model.findOne({
         where: { slug },
         include: [
-          { model: models.Question, include: [models.Answer, models.User] }
-        ]
+          {
+            model: models.Question,
+            include: [models.Answer, models.User]
+          }
+        ],
+        order: [[models.Question, "createdAt", "DESC"]]
       });
 
       response(res, 200, data);
