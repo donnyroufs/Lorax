@@ -36,7 +36,7 @@ const Overview = ({ match }) => {
   return (
     <SimpleGrid minChildWidth="400px" spacing={10} w="100%" m="4rem">
       <Flex height="100%" flexDir="column">
-        <AnimatedList animation={"slide"} initialAnimationDuration="4000">
+        <AnimatedList animation={"zoom"} initialAnimationDuration="2000">
           {questions.map(question => (
             <Question question={question} key={question.id} setShow={setShow} />
           ))}
@@ -47,16 +47,11 @@ const Overview = ({ match }) => {
           {questions
             .filter(q => q.id === show)
             .map(question => (
-              <Description
-                title={question.title}
-                description={question.description}
-                createdAt={question.createdAt}
-                key={question.id}
-              />
+              <Description {...question} key={question.id} />
             ))}
         </AnimatedList>
 
-        <AnimatedList animation={"grow"}>
+        <AnimatedList animation={"grow"} initialAnimationDuration="2000">
           {answers
             .filter(q => q.id === show)
             .flatMap(q => q.data)

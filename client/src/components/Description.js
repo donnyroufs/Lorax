@@ -1,7 +1,12 @@
 import React from "react";
-import { Flex, Box, Heading, Text } from "@chakra-ui/core";
+import { Flex, Box, Heading, Text, Avatar } from "@chakra-ui/core";
 
-const Description = ({ title, description, createdAt }) => {
+const Description = ({
+  title,
+  description,
+  createdAt,
+  User: { avatar, username }
+}) => {
   return (
     <Flex
       bg="white"
@@ -15,12 +20,17 @@ const Description = ({ title, description, createdAt }) => {
       marginBottom="2rem"
       flexDir="column"
     >
-      <Box as="header">
-        <Heading fontSize="1.6rem">{title}</Heading>
-        <Text fontSize=".9rem" opacity=".8">
-          <strong>{createdAt}</strong>
-        </Text>
-      </Box>
+      <Flex as="header" alignItems="center">
+        <Box marginRight="1rem">
+          <Avatar name={username} src={avatar} />
+        </Box>
+        <Box>
+          <Heading fontSize="1.6rem">{title}</Heading>
+          <Text fontSize=".9rem" opacity=".8">
+            <strong>{createdAt}</strong>
+          </Text>
+        </Box>
+      </Flex>
       <Box marginTop="1rem">{description}</Box>
     </Flex>
   );
