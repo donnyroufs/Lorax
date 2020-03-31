@@ -7,7 +7,7 @@ class AnswerController extends Controller {
   }
 
   // UserId, QuestionId, messageUrl, description
-  async createAnser(answer) {
+  async createAnswer(answer) {
     try {
       const data = await models.Answer.create({
         ...answer

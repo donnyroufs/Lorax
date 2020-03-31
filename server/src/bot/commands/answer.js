@@ -10,9 +10,9 @@ export const run = async ({ message, command, args }) => {
   const messageUrl = message.url;
   const description = answer;
 
-  const created = await controller.createAnser({
+  const created = await controller.createAnswer({
     QuestionId: questionId,
-    UserId: userId,
+    UserId: message.author.id,
     messageUrl,
     description
   });

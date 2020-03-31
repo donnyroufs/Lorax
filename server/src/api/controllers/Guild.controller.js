@@ -37,22 +37,6 @@ class GuildController extends Controller {
       response(res, 404, err, false);
     }
   }
-  // try {
-  //   const data = await this.model.findOne({
-  //     where: { slug },
-  //     include: [
-  //       {
-  //         model: models.Question,
-  //         include: [
-  //           {
-  //             model: models.Answer,
-  //             include: [models.User]
-  //           }
-  //         ]
-  //       }
-  //     ],
-  //     order: [[models.Question, "createdAt", "DESC"]]
-  //   });
 
   // @TODO: Add Pagination
   // @NOTE: Doesnt matter for now. - Might implement infinite scroll?
@@ -84,6 +68,7 @@ class GuildController extends Controller {
     }
   }
   /* Methods that are not related to the rest api */
+  // @REFACTOR: Move to bot controllers
 
   async _create({ id, name, memberCount }, icon) {
     const slug = urlSlug(name);
