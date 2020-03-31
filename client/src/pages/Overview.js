@@ -7,7 +7,7 @@ import { AnimatedList } from "react-animated-list";
 
 import { ErrorCard } from "../components/index";
 import Question from "../components/Question";
-import { Description } from "../components";
+import { Description, Answer } from "../components";
 
 /*eslint-disable*/
 
@@ -15,6 +15,7 @@ const Overview = ({ match }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(null);
   const questions = useSelector(state => state.guild.questions);
+  const answers = useSelector(state => state.guild.answers);
   const loading = useSelector(state => state.guild.loading);
   const error = useSelector(state => state.guild.error);
 
@@ -52,6 +53,15 @@ const Overview = ({ match }) => {
                 createdAt={question.createdAt}
                 key={question.id}
               />
+            ))}
+        </AnimatedList>
+
+        <AnimatedList animation={"grow"}>
+          {answers
+            .filter(q => q.id === show)
+            .flatMap(q => q.data)
+            .flatMap(answer => (
+              <Answer {...answer} />
             ))}
         </AnimatedList>
       </Flex>

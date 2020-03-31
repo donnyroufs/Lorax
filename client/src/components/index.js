@@ -5,5 +5,6 @@ import Loader from "./Loader";
 import Card from "./Card";
 import ErrorCard from "./ErrorCard";
 import Description from "./Description";
+import Answer from "./Answer";
 
-export { Layout, Header, Navbar, Card, Loader, ErrorCard, Description };
+export { Layout, Header, Navbar, Answer, Card, Loader, ErrorCard, Description };

@@ -5,7 +5,7 @@ const Description = ({ title, description, createdAt }) => {
   return (
     <Flex
       bg="white"
-      height="200px"
+      minH="300px"
       border="1px"
       borderStyle="solid"
       borderWidth="1px"

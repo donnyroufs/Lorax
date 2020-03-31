@@ -3,6 +3,7 @@ import { SUCCESS_GUILDS, SUCCESS_GUILD, GET_GUILD, ERROR } from "../types";
 const initialState = {
   guilds: [],
   questions: [],
+  answers: [],
   loading: true,
   error: false
 };
@@ -29,10 +30,19 @@ const guildReducer = (state = initialState, action) => {
         loading: false
       };
 
+    // @REFACTOR: DO THIS IN THE ACTION!!
     case SUCCESS_GUILD:
       return {
         ...state,
         questions: action.payload.data.Questions,
+        answers: action.payload.data.Questions.filter(
+          q => q.Answers.length >= 1
+        ).map(question => {
+          return {
+            id: question.id,
+            data: question.Answers
+          };
+        }),
         loading: false
       };
 
