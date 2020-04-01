@@ -10,7 +10,9 @@ export default {
     this.app.use(cors());
     this.middleware();
     this.routes();
-    this.serve();
+    if (process.env.NODE_ENV === "prod") {
+      this.serve();
+    }
   },
   middleware() {
     this.app.use("/", express.json());
