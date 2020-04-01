@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Heading, Text, Avatar } from "@chakra-ui/core";
+import { Flex, Box, Heading, Text, Avatar, Link } from "@chakra-ui/core";
 
 const Answer = ({
   messageUrl,
@@ -22,7 +22,9 @@ const Answer = ({
     >
       <Flex as="header" alignItems="center">
         <Box marginRight="1rem">
-          <Avatar name={username} src={avatar} />
+          <Link href={messageUrl}>
+            <Avatar name={username} src={avatar} />
+          </Link>
         </Box>
         <Box>
           <Heading fontSize="1.6rem">{username}</Heading>

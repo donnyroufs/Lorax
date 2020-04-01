@@ -19,8 +19,6 @@ const Overview = ({ match }) => {
   const loading = useSelector(state => state.guild.loading);
   const error = useSelector(state => state.guild.error);
 
-  console.log(show);
-
   useEffect(() => {
     dispatch(getGuild(match.params.slug));
   }, [match.params.slug]);
@@ -56,7 +54,7 @@ const Overview = ({ match }) => {
             .filter(q => q.id === show)
             .flatMap(q => q.data)
             .flatMap(answer => (
-              <Answer {...answer} />
+              <Answer {...answer} key={answer.id} />
             ))}
         </AnimatedList>
       </Flex>
