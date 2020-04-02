@@ -6,7 +6,7 @@ const Card = ({ guild }) => {
   return (
     <Flex
       as={ReactLink}
-      to={guild.slug + "/overview"}
+      to={`/${guild.slug}/`}
       align="center"
       w="400px"
       height="120px"

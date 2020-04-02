@@ -20,7 +20,7 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/" component={Page.Home} />
-            <Route exact path="/:slug/overview" component={Page.Overview} />
+            <Route exact path="/:slug/" component={Page.Overview} />
             <Route exact path="/:slug/questions" component={Page.Questions} />
             <Route exact path="/:slug/answered" component={Page.Answered} />
             <Route exact path="*" component={Page.Error} />

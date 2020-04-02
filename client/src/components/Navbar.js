@@ -2,20 +2,13 @@ import React from "react";
 import { useRouteMatch } from "react-router-dom";
 import { NavLink as ReactLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import {
-  Flex,
-  List,
-  ListItem,
-  Heading,
-  Stack,
-  Box,
-  Link
-} from "@chakra-ui/core";
+import { Flex, List, ListItem, Heading, Stack, Box } from "@chakra-ui/core";
 
 import { NavbarFooter } from "../components";
 
 const Navbar = () => {
   const match = useRouteMatch("/:id");
+  console.log(match);
   return (
     <Flex
       as="nav"
@@ -75,54 +68,33 @@ const Navbar = () => {
         {match && (
           <React.Fragment>
             <ListItem>
-              <Link
+              <ReactLink
                 as={ReactLink}
-                to="overview"
+                to={`${match.url}/`}
                 exact={true}
-                display="block"
-                _hover={{
-                  bg: "lightPurple",
-                  color: "purple",
-                  fontWeight: "bold"
-                }}
-                p="1rem 3rem"
-                cursor="pointer"
+                className="ducktaped-chakra-react-link"
               >
                 Overview
-              </Link>
+              </ReactLink>
             </ListItem>
             <ListItem>
-              <Link
+              <ReactLink
                 as={ReactLink}
                 to="questions"
                 exact={true}
-                display="block"
-                _hover={{
-                  bg: "lightPurple",
-                  color: "purple",
-                  fontWeight: "bold"
-                }}
-                p="1rem 3rem"
-                cursor="pointer"
+                className="ducktaped-chakra-react-link"
               >
                 Questions
-              </Link>
+              </ReactLink>
             </ListItem>
             <ListItem>
-              <Link
+              <ReactLink
                 as={ReactLink}
                 to="answered"
-                display="block"
-                _hover={{
-                  bg: "lightPurple",
-                  color: "purple",
-                  fontWeight: "bold"
-                }}
-                p="1rem 3rem"
-                cursor="pointer"
+                className="ducktaped-chakra-react-link"
               >
                 Answered
-              </Link>
+              </ReactLink>
             </ListItem>
           </React.Fragment>
         )}
