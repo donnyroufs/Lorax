@@ -8,7 +8,7 @@ class GuildController extends Controller {
     super(model);
 
     this.getById = this.getById.bind(this);
-    this.getOverviewBySlug = this.getOverviewBySlug.bind(this);
+    this.getOverview = this.getOverview.bind(this);
   }
 
   // Difference is that it includes the question association
@@ -40,11 +40,36 @@ class GuildController extends Controller {
 
   // @TODO: Add Pagination
   // @NOTE: Doesnt matter for now. - Might implement infinite scroll?
-  async getOverviewBySlug(req, res) {
-    const { slug } = req.params;
+  // async getOverviewBySlug(req, res) {
+  //   const { slug } = req.params;
+  //   try {
+  //     const data = await this.model.findOne({
+  //       where: { slug },
+  //       include: [
+  //         {
+  //           model: models.Question,
+  //           include: [
+  //             models.Answer,
+  //             models.User,
+  //             {
+  //               model: models.Answer,
+  //               include: models.User
+  //             }
+  //           ]
+  //         }
+  //       ],
+  //       order: [[models.Question, "createdAt", "DESC"]]
+  //     });
+
+  //     response(res, 200, data);
+  //   } catch (err) {
+  //     console.log(err);
+  //     response(res, 404, err, false);
+  //   }
+  // }
+  async getOverview(req, res) {
     try {
-      const data = await this.model.findOne({
-        where: { slug },
+      const data = await this.model.findByPk(res.locals.guildId, {
         include: [
           {
             model: models.Question,
