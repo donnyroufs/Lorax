@@ -10,7 +10,21 @@ class QuestionController extends Controller {
   constructor(model) {
     super(model);
 
+    this.search = this.search.bind(this);
     this.byGuild = this.byGuild.bind(this);
+  }
+
+  async search(req, res) {
+    const { query } = req;
+    try {
+      const data = await models.Question.search(
+        query.question,
+        res.locals.guildId
+      );
+      response(res, 200, data);
+    } catch (err) {
+      response(res, 400, err);
+    }
   }
 
   // @NOTE: No idea how to get the data by query, so using js instead.

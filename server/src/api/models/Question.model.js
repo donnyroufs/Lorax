@@ -4,6 +4,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+
     description: {
       type: DataTypes.STRING,
       allowNull: false
@@ -46,6 +47,78 @@ export default (sequelize, DataTypes) => {
       }
     });
   };
+
+  Question["getSearchVector"] = () => {
+    return "PostText";
+  };
+
+  (Question["addFullTextIndex"] = () => {
+    const searchFields = ["title", "description"];
+    const vectorName = Question.getSearchVector();
+
+    sequelize
+      .query(
+        'ALTER TABLE "' +
+          Question.tableName +
+          '" ADD COLUMN "' +
+          vectorName +
+          '" TSVECTOR'
+      )
+      .then(() => {
+        return sequelize
+          .query(
+            'UPDATE "' +
+              Question.tableName +
+              '" SET "' +
+              vectorName +
+              "\" = to_tsvector('english', " +
+              searchFields.join(" || ' ' || ") +
+              ")"
+          )
+          .catch(err => {
+            throw err;
+          });
+      })
+      .then(() => {
+        return sequelize
+          .query(
+            'CREATE INDEX Question_search_idx ON "' +
+              Question.tableName +
+              '" USING gin("' +
+              vectorName +
+              '");'
+          )
+          .catch(err => {
+            throw err;
+          });
+      })
+      .then(() => {
+        return sequelize
+          .query(
+            'CREATE TRIGGER Question_vector_update BEFORE INSERT OR UPDATE ON "' +
+              Question.tableName +
+              '" FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger("' +
+              vectorName +
+              "\", 'pg_catalog.english', " +
+              searchFields.join(", ") +
+              ")"
+          )
+          .catch(err => {
+            throw err;
+          });
+      })
+      .catch(err => {
+        throw err;
+      });
+  }),
+    (Question["search"] = (query, GuildId) => {
+      query = sequelize.getQueryInterface().escape(query);
+
+      return sequelize.query(
+        `SELECT * FROM "Questions" WHERE "${Question.getSearchVector()}" @@ plainto_tsquery('english', ${query}) AND "GuildId"='${GuildId}'`,
+        Question
+      );
+    });
 
   return Question;
 };
