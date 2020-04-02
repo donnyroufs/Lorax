@@ -41,7 +41,7 @@ const Header = () => {
               .map(guild => guild.name)}
           {!match && "Discord Faq"}
         </Link>
-        {match && <Searchbar placeholder="Looking for an answer?" />}
+        {match && <Searchbar placeholder="Looking for a specific question?" />}
       </Flex>
       <Account />
     </Flex>

@@ -21,10 +21,9 @@ function App() {
           <Switch>
             <Route exact path="/" component={Page.Home} />
             <Route exact path="/:slug/overview" component={Page.Overview} />
-            <Route exact path="*" component={Page.Error} />
-            {/* questions and answers do not exist yet */}
             <Route exact path="/:slug/questions" component={Page.Questions} />
             <Route exact path="/:slug/answered" component={Page.Answered} />
+            <Route exact path="*" component={Page.Error} />
           </Switch>
         </Layout>
       </Router>

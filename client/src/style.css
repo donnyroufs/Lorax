@@ -31,6 +31,11 @@ a {
   background: #e9daff;
 }
 
+.active--filter {
+  color: #a264ff;
+  font-weight: bold;
+}
+
 .ducktaped-chakra-react-link {
   cursor: pointer;
   transition: all 0.15s ease-out;

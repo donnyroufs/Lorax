@@ -18,9 +18,10 @@ const Overview = ({ match }) => {
   const answers = useSelector(state => state.guild.answers);
   const loading = useSelector(state => state.guild.loading);
   const error = useSelector(state => state.guild.error);
+  const guildId = useSelector(state => state.guild.id);
 
   useEffect(() => {
-    dispatch(getGuild(match.params.slug));
+    dispatch(getGuild(guildId, match.params.slug));
   }, [match.params.slug]);
 
   if (loading) {

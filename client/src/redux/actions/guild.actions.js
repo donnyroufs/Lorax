@@ -29,12 +29,12 @@ export const getGuilds = () => async dispatch => {
 
 // @GET: Gets guild by ID with questions and answers.
 // @NOTE: Should probably refactor this later on to
-export const getGuild = slug => async dispatch => {
+export const getGuild = (id, slug) => async dispatch => {
   dispatch({
     type: GET_GUILD
   });
 
-  const data = await request(`/api/guild/overview/${slug}`);
+  const data = await request(`/api/guild/overview/${id}?slug=${slug}`);
 
   if (!data.ok || data.data == null) {
     dispatch({

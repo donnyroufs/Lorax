@@ -1,8 +1,6 @@
-import { SUCCESS_GUILDS, SUCCESS_GUILD, GET_GUILD, ERROR } from "../types";
+import { ERROR, SUCCESS_ANSWERS, GET_ANSWERS } from "../types";
 
 const initialState = {
-  id: null,
-  guilds: [],
   questions: [],
   answers: [],
   loading: true,
@@ -18,32 +16,27 @@ const guildReducer = (state = initialState, action) => {
         error: true
       };
 
-    case GET_GUILD:
+    case GET_ANSWERS:
       return {
         ...state,
         loading: true
       };
 
-    case SUCCESS_GUILDS:
-      return {
-        ...state,
-        guilds: action.payload.data,
-        loading: false
-      };
-
     // @REFACTOR: DO THIS IN THE ACTION!!
-    case SUCCESS_GUILD:
+    case SUCCESS_ANSWERS:
       console.log(action.payload);
       return {
         ...state,
-        id: action.payload.data.id,
-        questions: action.payload.data.Questions,
-        answers: action.payload.data.Questions.filter(
-          q => q.Answers.length >= 1
-        ).map(question => {
+        questions: action.payload.data.map((q, index) => {
           return {
-            id: question.id,
-            data: question.Answers
+            ...q,
+            User: q.Answers[index].User
+          };
+        }),
+        answers: action.payload.data.map(q => {
+          return {
+            id: q.id,
+            data: q.Answers
           };
         }),
         loading: false

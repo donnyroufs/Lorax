@@ -9,12 +9,12 @@ import {
   Heading,
   Stack,
   Box,
-  PseudoBox,
   Link
 } from "@chakra-ui/core";
 
+import { NavbarFooter } from "../components";
+
 const Navbar = () => {
-  // @TODO: Add a slug to the database
   const match = useRouteMatch("/:id");
   return (
     <Flex
@@ -23,7 +23,6 @@ const Navbar = () => {
       maxW="300px"
       minW="300px"
       bg="#fff"
-      h="100%"
       direction="column"
       position="fixed"
       h="calc(100vh - 100px)"
@@ -129,23 +128,7 @@ const Navbar = () => {
         )}
       </List>
 
-      {!match && (
-        <Flex justifyContent="center" marginTop="auto" marginBottom="2rem">
-          <Link
-            href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=bot"
-            color="black"
-            fontWeight="bold"
-            bg="background"
-            p="1rem"
-            width="80%"
-            display="flex"
-            justifyContent="center"
-            textDecoration="none"
-          >
-            Add Bot
-          </Link>
-        </Flex>
-      )}
+      {!match && <NavbarFooter />}
     </Flex>
   );
 };
