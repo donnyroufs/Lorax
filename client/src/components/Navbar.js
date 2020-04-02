@@ -8,6 +8,7 @@ import { NavbarFooter } from "../components";
 
 const Navbar = () => {
   const match = useRouteMatch("/:id");
+
   console.log(match);
   return (
     <Flex
@@ -48,29 +49,12 @@ const Navbar = () => {
             {match && "Go Back"}
             {!match && "Home"}
           </ReactLink>
-          {/* <Link
-            as={ReactLink}
-            exact={true}
-            to="/"
-            display="block"
-            _hover={{
-              bg: "lightPurple",
-              color: "purple",
-              fontWeight: "bold"
-            }}
-            p="1rem 3rem"
-            cursor="pointer"
-          >
-            {match && "Go Back"}
-            {!match && "Home"}
-          </Link> */}
         </ListItem>
         {match && (
           <React.Fragment>
             <ListItem>
               <ReactLink
-                as={ReactLink}
-                to={`${match.url}/`}
+                to={`/${match.params.id}`}
                 exact={true}
                 className="ducktaped-chakra-react-link"
               >
@@ -79,9 +63,7 @@ const Navbar = () => {
             </ListItem>
             <ListItem>
               <ReactLink
-                as={ReactLink}
-                to="questions"
-                exact={true}
+                to={`/${match.params.id}/questions`}
                 className="ducktaped-chakra-react-link"
               >
                 Questions
@@ -89,8 +71,7 @@ const Navbar = () => {
             </ListItem>
             <ListItem>
               <ReactLink
-                as={ReactLink}
-                to="answered"
+                to={`/${match.params.id}/answered`}
                 className="ducktaped-chakra-react-link"
               >
                 Answered
