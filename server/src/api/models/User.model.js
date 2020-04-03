@@ -9,8 +9,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     },
     avatar: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     }
   });
   User.associate = models => {
