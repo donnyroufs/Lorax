@@ -6,7 +6,7 @@ const initialState = {
   error: false
 };
 
-const guildReducer = (state = initialState, action) => {
+const questionReducer = (state = initialState, action) => {
   switch (action.type) {
     case ERROR:
       return {
@@ -33,4 +33,4 @@ const guildReducer = (state = initialState, action) => {
   }
 };
 
-export default guildReducer;
+export default questionReducer;

@@ -9,6 +9,8 @@ import { ErrorCard } from "../components/index";
 import Question from "../components/Question";
 import { Description, Answer } from "../components";
 
+import { Search } from "../pages";
+import useSearch from "../hooks/useSearch";
 /*eslint-disable*/
 
 const Answered = ({ match }) => {
@@ -19,9 +21,11 @@ const Answered = ({ match }) => {
   const loading = useSelector(state => state.answers.loading);
   const error = useSelector(state => state.answers.error);
   const guildId = useSelector(state => state.guild.id);
+  const [initialLoad, query] = useSearch(match.params.slug);
 
   useEffect(() => {
     dispatch(getAnswers(guildId, match.params.slug));
+    initialLoad.current = false;
   }, [guildId]);
 
   if (loading) {
@@ -32,7 +36,7 @@ const Answered = ({ match }) => {
     return <ErrorCard code="404" description="Page not found" />;
   }
 
-  return (
+  return query.length <= 0 ? (
     <SimpleGrid minChildWidth="400px" spacing={10} w="100%" m="4rem">
       <Flex height="100%" flexDir="column">
         <AnimatedList animation={"zoom"} initialAnimationDuration="2000">
@@ -60,6 +64,8 @@ const Answered = ({ match }) => {
         </AnimatedList>
       </Flex>
     </SimpleGrid>
+  ) : (
+    <Search />
   );
 };
 

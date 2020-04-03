@@ -1,5 +1,5 @@
 import request from "../../utils/request";
-import { ERROR, GET_QUESTIONS, SUCCESS_QUESTIONS } from "../types";
+import { ERROR, GET_QUESTIONS, SUCCESS_QUESTIONS, CLEAR_STATE } from "../types";
 
 // @GET: Gets all questions that do not have answers yet.
 export const getQuestions = (id, slug) => async dispatch => {
@@ -20,4 +20,10 @@ export const getQuestions = (id, slug) => async dispatch => {
       }
     });
   }
+};
+
+export const clearState = () => async dispatch => {
+  dispatch({
+    type: CLEAR_STATE
+  });
 };

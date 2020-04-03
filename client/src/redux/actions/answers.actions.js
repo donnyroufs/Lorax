@@ -8,7 +8,7 @@ export const getAnswers = (id, slug) => async dispatch => {
   });
 
   const data = await request(`/api/answer/${id}?slug=${slug}`);
-  console.log(data);
+
   if (!data.ok || data.data == null) {
     dispatch({
       type: ERROR
