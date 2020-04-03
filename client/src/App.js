@@ -21,7 +21,7 @@ function App({ match }) {
           render={({ location }) => (
             <TransitionGroup>
               <CSSTransition
-                timeout={5000}
+                timeout={1000}
                 classNames="fade"
                 key={location.key}
               >
