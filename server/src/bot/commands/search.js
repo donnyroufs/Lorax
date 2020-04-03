@@ -22,7 +22,7 @@ export const run = async ({ message, command, args }) => {
         const params = new URLSearchParams(args);
         return {
           name: question.title,
-          value: `[posted by ${question.username}](http://localhost:3000/${slug}/?search=${params})`
+          value: `[posted by ${question.username}](${process.env.BASE_PATH}${slug}/?search=${params})`
         };
       }),
       timestamp: new Date()

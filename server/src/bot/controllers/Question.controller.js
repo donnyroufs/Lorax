@@ -61,7 +61,7 @@ class QuestionController extends Controller {
 
   // @FEATURE: Is not setup yet.
   getQuestionUrl(slug, guildSlug) {
-    return `http://localhost:3000/${guildSlug}/search?=${slug}`;
+    return `${process.env.BASE_PATH}${guildSlug}/search?=${slug}`;
   }
 }
 

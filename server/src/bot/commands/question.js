@@ -47,13 +47,13 @@ export const run = async ({ message, command, args }) => {
         // Question is created
         if (question.ok) {
           const data = await controller.getGuildSlug(message.guild.id);
-          // message.reply(
-          //   `Your question is created; You can visit it at: http://localhost:3000/${data.slug}/overview`
-          // );
+
+          const params = new URLSearchParams(args);
+
           const exampleEmbed = new Discord.MessageEmbed()
             .setColor("#0099ff")
             .setTitle(args)
-            .setURL(`http://localhost:3000/${data.slug}/overview`)
+            .setURL(`${process.env.BASE_PATH}${data.slug}/?search=${params}`)
             .setAuthor(message.author.username, message.author.avatarURL())
             .setDescription(description);
 
