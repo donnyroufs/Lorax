@@ -7,6 +7,7 @@ class Controller {
     this.all = this.all.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
+    this.findById = this.findById.bind(this);
   }
   async all(_, res) {
     try {
@@ -14,6 +15,16 @@ class Controller {
       response(res, 200, data);
     } catch (err) {
       response(res, 404, err, false);
+    }
+  }
+
+  async findById(req, res) {
+    const { id } = req.params;
+    try {
+      const data = await this.model.findByPk(id);
+      response(res, 200, data);
+    } catch (err) {
+      response(res, 500, data);
     }
   }
 

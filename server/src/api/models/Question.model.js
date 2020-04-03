@@ -1,3 +1,5 @@
+import db from "./index";
+
 export default (sequelize, DataTypes) => {
   const Question = sequelize.define("Question", {
     title: {
@@ -114,11 +116,19 @@ export default (sequelize, DataTypes) => {
     (Question["search"] = (query, GuildId) => {
       query = sequelize.getQueryInterface().escape(query);
 
-      return sequelize.query(
-        `SELECT * FROM "Questions" WHERE "${Question.getSearchVector()}" @@ plainto_tsquery('english', ${query}) AND "GuildId"='${GuildId}'`,
-        Question
-      );
+      const rawQuery = `
+      SELECT *, "Questions"."id" AS "QuestionId" 
+      FROM "Questions" 
+      JOIN "Users" ON "Users"."id"="Questions"."UserId" 
+      WHERE "${Question.getSearchVector()}" @@ plainto_tsquery('english', ${query}) 
+      AND "GuildId"='${GuildId}'`;
+      // @REFACTOR: Get rid of template literals
+      return sequelize.query(rawQuery, {
+        hasJoin: true
+      });
     });
 
   return Question;
 };
+
+// OUTER JOIN "Answers" ON "Questions"."id"="Answers"."QuestionId"

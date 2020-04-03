@@ -26,7 +26,7 @@ const slugToId = async (req, res, next) => {
       response(res, 500, err, false);
     }
   } else {
-    res.locals.guildId = params.id;
+    res.locals.guildId = params.id || query.id;
   }
 
   next();

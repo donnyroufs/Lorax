@@ -4,6 +4,7 @@ import slugToId from "../../utils/slugToId";
 
 const router = Router();
 
+router.get("/search/:id", slugToId, controller.findById);
 router.get("/search", slugToId, controller.search);
 router.get("/", controller.all);
 router.post("/", controller.create);

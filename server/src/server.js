@@ -39,6 +39,7 @@ import guildController from "./api/controllers/Guild.controller";
 
   // Connects the database and syncs the models.
   models.sequelize.sync({ force: false }).then(() => {
+    // @NOTE: This belongs somewhere else?
     models.Question.addFullTextIndex();
     models.sequelize
       .authenticate()
