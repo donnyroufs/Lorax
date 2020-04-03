@@ -41,7 +41,7 @@ const Header = () => {
             guild
               .filter(g => g.slug === match.params.slug)
               .map(guild => guild.name)}
-          {isGuild && "Discord Faq"}
+          {isGuild && "Lorax"}
         </Link>
         {!isGuild && (
           <Searchbar placeholder="Looking for a specific question?" />

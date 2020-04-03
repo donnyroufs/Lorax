@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getGuild } from "../redux/actions/guild.actions";
+import { getGuild, clearState } from "../redux/actions/guild.actions";
 import { SimpleGrid, Flex } from "@chakra-ui/core";
 import { Loader } from "../components";
 import { AnimatedList } from "react-animated-list";
@@ -27,6 +27,12 @@ const Overview = ({ match }) => {
     dispatch(getGuild(guildId, match.params.slug));
     initialLoad.current = false;
   }, [match.params.slug]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
 
   if (loading) {
     return <Loader />;

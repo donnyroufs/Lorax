@@ -1,10 +1,11 @@
 import React from "react";
-import { Flex, Box, Heading, Text, Avatar } from "@chakra-ui/core";
+import { Flex, Box, Heading, Text, Avatar, Link } from "@chakra-ui/core";
 
 const Description = ({
   title,
   description,
   createdAt,
+  messageUrl,
   User: { avatar, username }
 }) => {
   return (
@@ -21,11 +22,13 @@ const Description = ({
       flexDir="column"
     >
       <Flex as="header" alignItems="center">
-        <Box marginRight="1rem">
+        <Box marginRight="1.5rem">
           <Avatar name={username} src={avatar} />
         </Box>
         <Box>
-          <Heading fontSize="1.6rem">{title}</Heading>
+          <Heading as={Link} href={messageUrl} fontSize="1.6rem" color="dark">
+            {title}
+          </Heading>
           <Text fontSize=".9rem" opacity=".8">
             <strong>{createdAt.split("T")[0]}</strong>
           </Text>

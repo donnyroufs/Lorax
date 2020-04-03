@@ -61,9 +61,9 @@ const About = ({ match }) => {
           />
         </Heading>
         <Text lineHeight="2.2rem" fontSize="1.05rem">
-          DiscordFAQ is a discord bot that's being powered by an Express
-          back-end and a React front-end. It's main purpose is to prevent people
-          from asking the same question over and over again.
+          Lorax is a discord bot that's being powered by an Express back-end and
+          a React front-end. It's main purpose is to prevent people from asking
+          the same question over and over again.
         </Text>
         <Text lineHeight="2.2rem" fontSize="1.05rem" mt="1.5rem">
           It detects whether questions has been asked already and gives the
@@ -71,8 +71,8 @@ const About = ({ match }) => {
           ask his question. That's up to him.
         </Text>
         <Text lineHeight="2.2rem" fontSize="1.05rem" mt="1.5rem">
-          When you add DiscordFAQ to your server, you will get your own webpage
-          where all the questions and answers will be listed.
+          When you add Lorax to your server, you will get your own webpage where
+          all the questions and answers will be listed.
         </Text>
         <Divider mt="2rem" />
 
@@ -135,12 +135,12 @@ const About = ({ match }) => {
             display="block"
             href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=bot"
           >
-            Subscribe to DiscordFAQ
+            Subscribe to Lorax
           </Link>
           <Link
             display="block"
             color="blue.500"
-            href="https://github.com/donnyroufs/discordfaq"
+            href="https://github.com/donnyroufs/Lorax"
           >
             Github Repo
           </Link>

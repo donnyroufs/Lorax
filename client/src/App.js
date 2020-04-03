@@ -7,7 +7,7 @@ import { getGuilds } from "./redux/actions/guild.actions";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 /* eslint-disable */
 
-function App({ match }) {
+function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function App({ match }) {
                 classNames="fade"
                 key={location.key}
               >
-                <Layout>
+                <Layout key={location.key}>
                   <Switch location={location}>
                     <Route exact path="/" component={Page.Home} />
                     <Route exact path="/about" component={Page.About} />

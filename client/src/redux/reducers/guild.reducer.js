@@ -1,4 +1,10 @@
-import { SUCCESS_GUILDS, SUCCESS_GUILD, GET_GUILD, ERROR } from "../types";
+import {
+  SUCCESS_GUILDS,
+  SUCCESS_GUILD,
+  GET_GUILD,
+  ERROR,
+  CLEAR_STATE
+} from "../types";
 
 const initialState = {
   id: null,
@@ -33,7 +39,6 @@ const guildReducer = (state = initialState, action) => {
 
     // @REFACTOR: DO THIS IN THE ACTION!!
     case SUCCESS_GUILD:
-      console.log(action.payload);
       return {
         ...state,
         id: action.payload.data.id,
@@ -47,6 +52,12 @@ const guildReducer = (state = initialState, action) => {
           };
         }),
         loading: false
+      };
+
+    case CLEAR_STATE:
+      return {
+        ...state,
+        id: null
       };
 
     default:
