@@ -4,8 +4,7 @@ import {
   GET_RESULTS,
   SUCCESS_RESULTS,
   SET_QUERY,
-  NO_RESULTS,
-  SUCCESS_ANSWERS
+  NO_RESULTS
 } from "../types";
 
 // @GET: Gets all questions that do not have answers yet.

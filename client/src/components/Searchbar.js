@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { useState } from "react";
 import { InputGroup, Input, InputLeftElement, Icon } from "@chakra-ui/core";
-import { setQuery } from "../redux/actions/search.actions";
+import { setQuery, getSearchResults } from "../redux/actions/search.actions";
+import queryString from "query-string";
+
+/* eslint-disable */
 
 const Searchbar = ({ placeholder }) => {
+  const match = useRouteMatch("/:id");
+
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
   const history = useHistory();
 
   const handleOnChange = ({ target }) => setValue(target.value);
+
   const handleOnSubmit = e => {
     e.preventDefault();
     dispatch(setQuery(value));
@@ -20,6 +26,15 @@ const Searchbar = ({ placeholder }) => {
     });
     setValue("");
   };
+
+  useEffect(() => {
+    if (history.location.search.length >= 1) {
+      const query = queryString.parse(history.location.search);
+      dispatch(setQuery(query.search));
+      dispatch(getSearchResults(undefined, match.params.id));
+      setValue("");
+    }
+  }, []);
 
   return (
     <InputGroup

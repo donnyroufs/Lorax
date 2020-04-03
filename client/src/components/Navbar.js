@@ -9,7 +9,6 @@ import { NavbarFooter } from "../components";
 const Navbar = () => {
   const match = useRouteMatch("/:id");
 
-  console.log(match);
   return (
     <Flex
       as="nav"
