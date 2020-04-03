@@ -10,13 +10,8 @@ export const run = async ({ message, command, args }) => {
 
   if (user != null) {
     // @TODO: Check if question already exists
-    // const data = await controller.findQuestions(guild.id, args);
-    // if (data == null || data.length <= 0) {
-    //   // Proceed
-    // } else {
-    //   // Ask if user wants to checkout the similiar questions.
-    //   return;
-    // }
+    // const data = await controller.similiarQuestions(args, guild.id);
+    // console.log(data);
 
     // Delete asked question
     message.delete();

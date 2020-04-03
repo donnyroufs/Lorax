@@ -18,7 +18,6 @@ class QuestionController extends Controller {
         },
         attributes: ["slug"]
       });
-      console.log(data);
       return data;
     } catch (err) {
       throw err;
@@ -45,29 +44,18 @@ class QuestionController extends Controller {
     }
   }
 
-  async findQuestions(guildId, question) {
+  async similiarQuestions(question, guildId) {
     try {
-      // @REFACTOR: Not sure how to implement this as of yet.
-      // @RESOURCE: https://medium.com/riipen-engineering/full-text-search-with-sequelize-and-postgresql-3572cb3093e7
-      const data = await models.Question.findAll({
-        attributes: ["messageUrl", "title", "slug"],
-        include: [
-          {
-            model: models.Guild,
-            attributes: ["slug"]
-          }
-        ],
-        where: {
-          GuildId: guildId,
-          title: {
-            [Op.iLike]: `%${question}%`
-          }
-        }
-      });
-
-      console.log(data);
+      const data = await models.Question.search(question, guildId);
+      return {
+        ok: true,
+        data
+      };
     } catch (err) {
-      throw err;
+      return {
+        ok: false,
+        data: err
+      };
     }
   }
 

@@ -24,6 +24,4 @@ export const run = async ({ message, command, args }) => {
   } else {
     message.reply(`Something went wrong... Your answer is not saved.`);
   }
-
-  // @TODO: Mark answer as solution
 };
