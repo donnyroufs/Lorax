@@ -10,7 +10,44 @@ class QuestionController extends Controller {
   constructor(model) {
     super(model);
 
+    this.findById = this.findById.bind(this);
+    this.search = this.search.bind(this);
     this.byGuild = this.byGuild.bind(this);
+  }
+
+  async search(req, res) {
+    const { query } = req;
+
+    try {
+      const data = await models.Question.search(
+        query.question,
+        res.locals.guildId
+      );
+      response(res, 200, data);
+    } catch (err) {
+      console.log(err);
+      response(res, 400, err, false);
+    }
+  }
+
+  async findById(req, res) {
+    const { id } = req.params;
+    try {
+      const data = await this.model.findByPk(id, {
+        include: [
+          models.Answer,
+          models.User,
+          {
+            model: models.Answer,
+            include: models.User
+          }
+        ]
+      });
+      response(res, 200, data);
+    } catch (err) {
+      console.log(err);
+      response(res, 500, data);
+    }
   }
 
   // @NOTE: No idea how to get the data by query, so using js instead.

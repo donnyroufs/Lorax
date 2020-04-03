@@ -15,3 +15,11 @@ export const SUCCESS_QUESTIONS = "SUCCESS_QUESTIONS";
 // ANSWERS
 export const GET_ANSWERS = "GET_ANSWERS";
 export const SUCCESS_ANSWERS = "SUCCESS_ANSWERS";
+
+// SEARCHBAR
+export const SUCCESS_RESULTS = "SUCCESS_RESULTS";
+export const GET_RESULTS = "GET_RESULTS";
+export const SET_QUERY = "SET_QUERY";
+export const NO_RESULTS = "NO_RESULTS";
+
+export const CLEAR_STATE = "CLEAR_STATE";

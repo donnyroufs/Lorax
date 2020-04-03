@@ -7,6 +7,7 @@ import Card from "./Card";
 import ErrorCard from "./ErrorCard";
 import Description from "./Description";
 import Answer from "./Answer";
+import Question from "./Question";
 
 export {
   Layout,
@@ -16,6 +17,7 @@ export {
   Answer,
   Card,
   Loader,
+  Question,
   ErrorCard,
   Description
 };

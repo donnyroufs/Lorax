@@ -1,9 +1,9 @@
 import React from "react";
 import { Flex, Box, Heading, Text, Badge } from "@chakra-ui/core";
 
-const Question = ({ question, setShow }) => {
+const Question = ({ question, setShow, hack }) => {
   const handleOnClick = e => {
-    setShow(question.id);
+    setShow(hack ? question.QuestionId : question.id);
     window.scrollTo(0, 0);
   };
 

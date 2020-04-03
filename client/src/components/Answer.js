@@ -7,6 +7,8 @@ const Answer = ({
   createdAt,
   User: { username, avatar }
 }) => {
+  console.log("Answer: ", description, username);
+
   return (
     <Flex
       bg="white"

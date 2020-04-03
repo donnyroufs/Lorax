@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGuild } from "../redux/actions/guild.actions";
 import { SimpleGrid, Flex } from "@chakra-ui/core";
@@ -8,7 +8,8 @@ import { AnimatedList } from "react-animated-list";
 import { ErrorCard } from "../components/index";
 import Question from "../components/Question";
 import { Description, Answer } from "../components";
-
+import { Search } from "../pages";
+import useSearch from "../hooks/useSearch";
 /*eslint-disable*/
 
 const Overview = ({ match }) => {
@@ -20,8 +21,11 @@ const Overview = ({ match }) => {
   const error = useSelector(state => state.guild.error);
   const guildId = useSelector(state => state.guild.id);
 
+  const [initialLoad, query] = useSearch(match.params.slug);
+
   useEffect(() => {
     dispatch(getGuild(guildId, match.params.slug));
+    initialLoad.current = false;
   }, [match.params.slug]);
 
   if (loading) {
@@ -32,7 +36,7 @@ const Overview = ({ match }) => {
     return <ErrorCard code="404" description="Page not found" />;
   }
 
-  return (
+  return query.length <= 0 ? (
     <SimpleGrid minChildWidth="400px" spacing={10} w="100%" m="4rem">
       <Flex height="100%" flexDir="column">
         <AnimatedList animation={"zoom"} initialAnimationDuration="2000">
@@ -60,6 +64,8 @@ const Overview = ({ match }) => {
         </AnimatedList>
       </Flex>
     </SimpleGrid>
+  ) : (
+    <Search />
   );
 };
 
