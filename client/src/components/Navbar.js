@@ -3,11 +3,13 @@ import { useRouteMatch } from "react-router-dom";
 import { NavLink as ReactLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { Flex, List, ListItem, Heading, Stack, Box } from "@chakra-ui/core";
+import useGuild from "../hooks/useGuild";
 
 import { NavbarFooter } from "../components";
 
 const Navbar = () => {
   const match = useRouteMatch("/:id");
+  const isGuild = useGuild();
 
   return (
     <Flex
@@ -19,6 +21,9 @@ const Navbar = () => {
       direction="column"
       position="fixed"
       h="calc(100vh - 100px)"
+      borderRight="1px"
+      borderStyle="solid"
+      borderColor="background"
     >
       <Stack isInline align="center" marginTop="5rem" marginBottom="2rem">
         <Box
@@ -45,11 +50,23 @@ const Navbar = () => {
             exact={true}
             className="ducktaped-chakra-react-link"
           >
-            {match && "Go Back"}
-            {!match && "Home"}
+            {isGuild ? "Home" : "Go Back"}
           </ReactLink>
         </ListItem>
-        {match && (
+
+        {isGuild && (
+          <ListItem>
+            <ReactLink
+              to={`/about`}
+              exact={true}
+              className="ducktaped-chakra-react-link"
+            >
+              About
+            </ReactLink>
+          </ListItem>
+        )}
+
+        {!isGuild && (
           <React.Fragment>
             <ListItem>
               <ReactLink
@@ -80,7 +97,7 @@ const Navbar = () => {
         )}
       </List>
 
-      {!match && <NavbarFooter />}
+      {isGuild && <NavbarFooter />}
     </Flex>
   );
 };

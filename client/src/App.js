@@ -19,6 +19,7 @@ function App({ match }) {
         <Layout>
           <Switch>
             <Route exact path="/" component={Page.Home} />
+            <Route exact path="/about" component={Page.About} />
             <Route exact path="/:slug/" component={Page.Overview} />
             <Route exact path="/:slug/questions" component={Page.Questions} />
             <Route exact path="/:slug/answered" component={Page.Answered} />

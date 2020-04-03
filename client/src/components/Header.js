@@ -3,12 +3,14 @@ import { useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Searchbar from "./Searchbar";
 import Account from "./Account";
+import useGuild from "../hooks/useGuild";
 
 import { Flex, Link } from "@chakra-ui/core";
 
 const Header = () => {
   const match = useRouteMatch("/:slug");
   const guild = useSelector(state => state.guild.guilds);
+  const isGuild = useGuild();
 
   return (
     <Flex
@@ -35,13 +37,15 @@ const Header = () => {
           letterSpacing={1.25}
           textDecoration="none"
         >
-          {match &&
+          {!isGuild &&
             guild
               .filter(g => g.slug === match.params.slug)
               .map(guild => guild.name)}
-          {!match && "Discord Faq"}
+          {isGuild && "Discord Faq"}
         </Link>
-        {match && <Searchbar placeholder="Looking for a specific question?" />}
+        {!isGuild && (
+          <Searchbar placeholder="Looking for a specific question?" />
+        )}
       </Flex>
       <Account />
     </Flex>

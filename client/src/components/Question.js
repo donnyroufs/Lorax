@@ -1,17 +1,18 @@
 import React from "react";
-import { Flex, Box, Heading, Text, Badge } from "@chakra-ui/core";
+import { Flex, Box, Heading, Text, Badge, PseudoBox } from "@chakra-ui/core";
 
-const Question = ({ question, setShow, hack }) => {
+const Question = ({ question, setShow, hack, show }) => {
   const handleOnClick = e => {
     setShow(hack ? question.QuestionId : question.id);
     window.scrollTo(0, 0);
   };
 
   return (
-    <Flex
+    <PseudoBox
       bg="white"
       height="200px"
       border="1px"
+      display="flex"
       borderStyle="solid"
       borderWidth="1px"
       borderColor="borderGray"
@@ -22,6 +23,11 @@ const Question = ({ question, setShow, hack }) => {
       justifyContent="space-between"
       onClick={handleOnClick}
       cursor="pointer"
+      transition="0.3s ease all"
+      className={show === question.id ? "question-active" : ""}
+      _hover={{
+        borderColor: "purple"
+      }}
     >
       <Box as="header">
         <Heading fontSize="1.6rem">{question.title}</Heading>
@@ -63,7 +69,7 @@ const Question = ({ question, setShow, hack }) => {
           </Badge>
         </Box>
       </Flex>
-    </Flex>
+    </PseudoBox>
   );
 };
 

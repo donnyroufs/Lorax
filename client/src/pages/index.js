@@ -4,4 +4,6 @@ import Overview from "./Overview";
 import Questions from "./Questions";
 import Answered from "./Answered";
 import Search from "./Search";
-export { Home, Overview, Questions, Answered, Search, Error };
+import About from "./About";
+
+export { Home, Overview, Questions, Answered, About, Search, Error };

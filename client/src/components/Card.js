@@ -1,18 +1,28 @@
 import React from "react";
 import { Link as ReactLink } from "react-router-dom";
-import { Box, Badge, Stack, Flex, Image, Heading } from "@chakra-ui/core";
+import {
+  Box,
+  Badge,
+  Stack,
+  Flex,
+  Image,
+  Heading,
+  PseudoBox
+} from "@chakra-ui/core";
 
 const Card = ({ guild }) => {
   return (
-    <Flex
+    <PseudoBox
+      display="flex"
       as={ReactLink}
       to={`/${guild.slug}/`}
       align="center"
+      alignItems="center"
       w="400px"
       height="120px"
       overflow="hidden"
       background="white"
-      border="1px"
+      border="3px"
       borderStyle="solid"
       borderWidth="1px"
       borderColor="borderGray"
@@ -22,6 +32,10 @@ const Card = ({ guild }) => {
       marginRight="2rem"
       minW="400px"
       marginBottom="2rem"
+      transition="0.3s ease all"
+      _hover={{
+        borderColor: "purple"
+      }}
     >
       <Image
         src={guild.avatar}
@@ -48,7 +62,7 @@ const Card = ({ guild }) => {
           <Box as="span">{guild.memberCount} Users</Box>
         </Stack>
       </Flex>
-    </Flex>
+    </PseudoBox>
   );
 };
 

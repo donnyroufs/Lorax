@@ -3,7 +3,12 @@ import { Flex, Heading } from "@chakra-ui/core";
 
 const ErrorCard = ({ code, description }) => {
   return (
-    <Flex justifyContent="center" alignItems="center" w="100%">
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      w="100%"
+      h="calc(100vh - 100px)"
+    >
       <Flex
         align="center"
         w="600px"
@@ -26,7 +31,8 @@ const ErrorCard = ({ code, description }) => {
           letterSpacing="1px"
           textTransform="uppercase"
         >
-          Error: {description} {code}!
+          {code > 400 && "Error:"}
+          {description} {code}!
         </Heading>
       </Flex>
     </Flex>

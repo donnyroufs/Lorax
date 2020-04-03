@@ -41,7 +41,12 @@ const Overview = ({ match }) => {
       <Flex height="100%" flexDir="column">
         <AnimatedList animation={"zoom"} initialAnimationDuration="2000">
           {questions.map(question => (
-            <Question question={question} key={question.id} setShow={setShow} />
+            <Question
+              question={question}
+              key={question.id}
+              setShow={setShow}
+              show={show}
+            />
           ))}
         </AnimatedList>
       </Flex>

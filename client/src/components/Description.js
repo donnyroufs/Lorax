@@ -27,7 +27,7 @@ const Description = ({
         <Box>
           <Heading fontSize="1.6rem">{title}</Heading>
           <Text fontSize=".9rem" opacity=".8">
-            <strong>{createdAt}</strong>
+            <strong>{createdAt.split("T")[0]}</strong>
           </Text>
         </Box>
       </Flex>

@@ -16,7 +16,6 @@ body {
   height: calc(100% - 100px);
 }
 
-#root,
 .App {
   height: 100%;
 }
@@ -49,4 +48,8 @@ a {
   color: #a264ff;
   font-weight: bold;
   background: #e9daff;
+}
+
+.question-active {
+  border-color: #a264ff !important;
 }
