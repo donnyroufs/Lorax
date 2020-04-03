@@ -28,12 +28,6 @@ const Overview = ({ match }) => {
     initialLoad.current = false;
   }, [match.params.slug]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(clearState());
-    };
-  }, []);
-
   if (loading) {
     return <Loader />;
   }

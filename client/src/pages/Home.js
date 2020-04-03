@@ -1,6 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Loader } from "../components";
+import { clearState } from "../redux/actions/guild.actions";
 
 import { Card } from "../components/index";
 import { Flex } from "@chakra-ui/core";
@@ -8,6 +9,13 @@ import { Flex } from "@chakra-ui/core";
 const Home = ({ match }) => {
   const guilds = useSelector(state => state.guild.guilds);
   const loading = useSelector(state => state.guild.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, [dispatch]);
 
   if (loading) {
     return <Loader />;
