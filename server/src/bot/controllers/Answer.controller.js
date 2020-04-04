@@ -48,11 +48,17 @@ class AnswerController extends Controller {
     }
   }
 
+ 
   parseAnswer(message) {
     const [invalidUserId, ...answer] = message.split(" ");
-    const userId = invalidUserId.split("!")[1].slice(0, -1);
+    let userId = "";
+    if (invalidUserId.includes("!")) {
+      userId = invalidUserId.split("!")[1].slice(0, -1);
+    } else {
+      userId = invalidUserId.split("@")[1].slice(0, -1);
+    }
     return [userId, answer.join(" ")];
-  }
+  } 
 }
 
 export default new AnswerController();
