@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    container_name: lorax
+    restart: always
+    build: .
+    ports:
+      - '80:3000'
+    links:
+      - db
+    env_file:
+      - ./.env
+  db:
+    container_name: db
+    image: postgres:11.2-alpine
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/dbdata:/var/lib/postgresql/data
+   

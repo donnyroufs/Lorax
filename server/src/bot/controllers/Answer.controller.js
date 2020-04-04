@@ -48,6 +48,7 @@ class AnswerController extends Controller {
     }
   }
 
+ 
   parseAnswer(message) {
     const [invalidUserId, ...answer] = message.split(" ");
     let userId = "";
@@ -57,7 +58,7 @@ class AnswerController extends Controller {
       userId = invalidUserId.split("@")[1].slice(0, -1);
     }
     return [userId, answer.join(" ")];
-  }
+  } 
 }
 
 export default new AnswerController();

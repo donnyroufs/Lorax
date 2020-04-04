@@ -5,13 +5,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/server.js",
-    "build": "babel src --out-dir build",
-    "serve": "node build/server.js"
+    "build": "babel -d ./build ./src -s --copy-files",
+    "serve": "pm2-runtime start ./build/server.js"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "cors": "^2.8.5",
     "discord.js": "^12.1.1",
@@ -24,6 +25,7 @@
     "url-slug": "^2.3.1"
   },
   "devDependencies": {
+    "pm2": "^4.2.3",
     "sequelize-cli": "^5.5.1"
   }
 }
