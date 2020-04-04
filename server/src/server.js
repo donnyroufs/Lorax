@@ -8,28 +8,28 @@ import guildController from "./api/controllers/Guild.controller";
 (async () => {
   await server.start();
   await discord.start(() => {
-    discord.client.on("message", async message => {
+    discord.client.on("message", async (message) => {
       if (message.author.bot) return;
       await handleCommands(discord.client, message);
     });
 
     // Handle new Guilds, Deleted Guilds
-    discord.client.on("guildCreate", async event => {
+    discord.client.on("guildCreate", async (event) => {
       // generate avatar url
       const icon = event.iconURL({
-        format: "webp"
+        format: "webp",
       });
       await guildController._create(event, icon);
     });
 
-    discord.client.on("guildDelete", async event => {
+    discord.client.on("guildDelete", async (event) => {
       await guildController._delete(event);
     });
 
-    discord.client.on("guildUpdate", async event => {
+    discord.client.on("guildUpdate", async (event) => {
       // @BUG: The update event is "update" behind??.
       const icon = event.iconURL({
-        format: "webp"
+        format: "webp",
       });
       await guildController._update(event, icon);
     });
@@ -46,7 +46,7 @@ import guildController from "./api/controllers/Guild.controller";
       .then(() => {
         console.log("Database is up and running...");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Unable to connect to the database:", err);
       });
   });

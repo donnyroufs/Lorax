@@ -3,6 +3,7 @@ import controller from "../controllers/Answer.controller";
 // add groupp to user, prefix name with id?
 export const run = async ({ message, command, args }) => {
   const [userId, answer] = controller.parseAnswer(args);
+
   controller.findOrCreate(message.author, message.author.avatarURL());
 
   const questionAuthor = await controller.fetchUser(userId);
@@ -14,7 +15,7 @@ export const run = async ({ message, command, args }) => {
     QuestionId: questionId,
     UserId: message.author.id,
     messageUrl,
-    description
+    description,
   });
 
   if (created.ok) {

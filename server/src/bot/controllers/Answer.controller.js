@@ -10,16 +10,16 @@ class AnswerController extends Controller {
   async createAnswer(answer) {
     try {
       const data = await models.Answer.create({
-        ...answer
+        ...answer,
       });
       return {
         ok: true,
-        data
+        data,
       };
     } catch (err) {
       return {
         ok: false,
-        data: err
+        data: err,
       };
     }
   }
@@ -30,27 +30,32 @@ class AnswerController extends Controller {
         include: [
           {
             model: models.Question,
-            attributes: ["id"]
-          }
+            attributes: ["id"],
+          },
         ],
         order: [[models.Question, "createdAt", "DESC"]],
-        limit: 1
+        limit: 1,
       });
       return {
         ok: true,
-        data
+        data,
       };
     } catch (err) {
       return {
         ok: false,
-        data: err
+        data: err,
       };
     }
   }
 
   parseAnswer(message) {
     const [invalidUserId, ...answer] = message.split(" ");
-    const userId = invalidUserId.split("!")[1].slice(0, -1);
+    let userId = "";
+    if (invalidUserId.includes("!")) {
+      userId = invalidUserId.split("!")[1].slice(0, -1);
+    } else {
+      userId = invalidUserId.split("@")[1].slice(0, -1);
+    }
     return [userId, answer.join(" ")];
   }
 }
