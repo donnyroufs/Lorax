@@ -9,7 +9,7 @@ import {
   Divider,
   useClipboard,
   Icon,
-  useToast
+  useToast,
 } from "@chakra-ui/core";
 
 const About = ({ match }) => {
@@ -30,7 +30,7 @@ const About = ({ match }) => {
       description: "Copied heading url successfuly",
       status: "success",
       duration: 5000,
-      isClosable: true
+      isClosable: true,
     });
   }
   return (
@@ -55,9 +55,7 @@ const About = ({ match }) => {
             fontSize="1.25rem"
             cursor="pointer"
             id="about"
-            onClick={e =>
-              setValue(`http://localhost:3000/about#${e.target.id}`)
-            }
+            onClick={(e) => setValue(`http://lorax.me/about#${e.target.id}`)}
           />
         </Heading>
         <Text lineHeight="2.2rem" fontSize="1.05rem">
@@ -89,9 +87,7 @@ const About = ({ match }) => {
             fontSize="1.25rem"
             cursor="pointer"
             id="how-does-it-work"
-            onClick={e =>
-              setValue(`http://localhost:3000/about#${e.target.id}`)
-            }
+            onClick={(e) => setValue(`http://lorax.me/about#${e.target.id}`)}
           />
         </Heading>
 
@@ -116,9 +112,7 @@ const About = ({ match }) => {
             fontSize="1.25rem"
             cursor="pointer"
             id="development"
-            onClick={e =>
-              setValue(`http://localhost:3000/about#${e.target.id}`)
-            }
+            onClick={(e) => setValue(`http://lorax.me/about#${e.target.id}`)}
           />
         </Heading>
 
@@ -143,6 +137,13 @@ const About = ({ match }) => {
             href="https://github.com/donnyroufs/Lorax"
           >
             Github Repo
+          </Link>
+          <Link
+            display="block"
+            color="blue.500"
+            href="https://discord.gg/CCSpTs"
+          >
+            Discord test server
           </Link>
         </Box>
       </Box>

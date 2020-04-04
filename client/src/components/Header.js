@@ -9,7 +9,7 @@ import { Flex, Link } from "@chakra-ui/core";
 
 const Header = () => {
   const match = useRouteMatch("/:slug");
-  const guild = useSelector(state => state.guild.guilds);
+  const guild = useSelector((state) => state.guild.guilds);
   const isGuild = useGuild();
 
   return (
@@ -39,9 +39,9 @@ const Header = () => {
         >
           {!isGuild &&
             guild
-              .filter(g => g.slug === match.params.slug)
-              .map(guild => guild.name)}
-          {isGuild && "Lorax"}
+              .filter((g) => g.slug === match.params.slug)
+              .map((guild) => guild.name)}
+          {isGuild && "Lorax beta"}
         </Link>
         {!isGuild && (
           <Searchbar placeholder="Looking for a specific question?" />

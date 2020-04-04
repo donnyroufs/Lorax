@@ -4,22 +4,22 @@ import {
   GET_RESULTS,
   SUCCESS_RESULTS,
   SET_QUERY,
-  NO_RESULTS
+  NO_RESULTS,
 } from "../types";
 
 // @GET: Gets all questions that do not have answers yet.
-export const setQuery = query => async dispatch => {
+export const setQuery = (query) => async (dispatch) => {
   dispatch({
     type: SET_QUERY,
     payload: {
-      query
-    }
+      query,
+    },
   });
 };
 
 export const getSearchResults = (id, slug) => async (dispatch, getState) => {
   dispatch({
-    type: GET_RESULTS
+    type: GET_RESULTS,
   });
 
   const query = getState().search.query;
@@ -30,13 +30,13 @@ export const getSearchResults = (id, slug) => async (dispatch, getState) => {
 
   if (data.ok && data.data[0].length <= 0) {
     return dispatch({
-      type: NO_RESULTS
+      type: NO_RESULTS,
     });
   }
 
   if (!data.ok) {
     return dispatch({
-      type: ERROR
+      type: ERROR,
     });
   }
 
@@ -48,7 +48,7 @@ export const getSearchResults = (id, slug) => async (dispatch, getState) => {
 
     data.data[0][i] = {
       ...question,
-      Answers: answersData.data.Answers
+      Answers: answersData.data.Answers,
     };
   }
 
@@ -56,8 +56,8 @@ export const getSearchResults = (id, slug) => async (dispatch, getState) => {
   return dispatch({
     type: SUCCESS_RESULTS,
     payload: {
-      data: data.data[0]
-    }
+      data: data.data[0],
+    },
   });
 };
 

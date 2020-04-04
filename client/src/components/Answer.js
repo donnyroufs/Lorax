@@ -5,7 +5,7 @@ const Answer = ({
   messageUrl,
   description,
   createdAt,
-  User: { username, avatar }
+  User: { username, avatar },
 }) => {
   console.log("Answer: ", description, username);
 
@@ -31,7 +31,7 @@ const Answer = ({
         <Box>
           <Heading fontSize="1.6rem">{username}</Heading>
           <Text fontSize=".9rem" opacity=".8">
-            <strong>{createdAt}</strong>
+            <strong>{createdAt.split("T")[0]}</strong>
           </Text>
         </Box>
       </Flex>

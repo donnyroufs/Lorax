@@ -4,7 +4,7 @@ const initialState = {
   questions: [],
   answers: [],
   loading: true,
-  error: false
+  error: false,
 };
 
 const answerReducer = (state = initialState, action) => {
@@ -13,33 +13,32 @@ const answerReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: true
+        error: true,
       };
 
     case GET_ANSWERS:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     // @REFACTOR: DO THIS IN THE ACTION!!
     case SUCCESS_ANSWERS:
-      console.log(action.payload);
+      console.log(action.payload.data);
       return {
         ...state,
         questions: action.payload.data.map((q, index) => {
           return {
             ...q,
-            User: q.Answers[index].User
           };
         }),
-        answers: action.payload.data.map(q => {
+        answers: action.payload.data.map((q) => {
           return {
             id: q.id,
-            data: q.Answers
+            data: q.Answers,
           };
         }),
-        loading: false
+        loading: false,
       };
 
     default:

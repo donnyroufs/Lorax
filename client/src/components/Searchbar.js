@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { InputGroup, Input, InputLeftElement, Icon } from "@chakra-ui/core";
 import { setQuery, getSearchResults } from "../redux/actions/search.actions";
 import queryString from "query-string";
+import { clearState } from "../redux/actions/questions.actions";
 
 /* eslint-disable */
 
@@ -13,16 +14,15 @@ const Searchbar = ({ placeholder }) => {
 
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
-
   const history = useHistory();
 
   const handleOnChange = ({ target }) => setValue(target.value);
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(setQuery(value));
     history.push({
-      search: `?search=${value}`
+      search: `?search=${value}`,
     });
     setValue("");
   };
