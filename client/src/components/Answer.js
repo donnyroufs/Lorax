@@ -12,7 +12,8 @@ const Answer = ({
   return (
     <Flex
       bg="white"
-      height="200px"
+      minH="200px"
+      height="auto"
       border="1px"
       borderStyle="solid"
       borderWidth="1px"

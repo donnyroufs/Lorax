@@ -6,12 +6,13 @@ const Description = ({
   description,
   createdAt,
   messageUrl,
-  User: { avatar, username }
+  User: { avatar, username },
 }) => {
   return (
     <Flex
       bg="white"
       minH="300px"
+      height="auto"
       border="1px"
       borderStyle="solid"
       borderWidth="1px"

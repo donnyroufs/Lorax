@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, Box, Heading, Text, Badge, PseudoBox } from "@chakra-ui/core";
 
 const Question = ({ question, setShow, hack, show }) => {
-  const handleOnClick = e => {
+  const handleOnClick = (e) => {
     setShow(hack ? question.QuestionId : question.id);
     window.scrollTo(0, 0);
   };
@@ -10,7 +10,8 @@ const Question = ({ question, setShow, hack, show }) => {
   return (
     <PseudoBox
       bg="white"
-      height="200px"
+      minH="200px"
+      height="auto"
       border="1px"
       display="flex"
       borderStyle="solid"
@@ -26,7 +27,7 @@ const Question = ({ question, setShow, hack, show }) => {
       transition="0.3s ease all"
       className={show === question.id ? "question-active" : ""}
       _hover={{
-        borderColor: "purple"
+        borderColor: "purple",
       }}
     >
       <Box as="header">
