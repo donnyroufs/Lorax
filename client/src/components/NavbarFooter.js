@@ -15,6 +15,9 @@ const NavbarFooter = () => {
         display="flex"
         justifyContent="center"
         textDecoration="none"
+        _hover={{
+          textDecor: "none",
+        }}
       >
         Add Bot
       </Link>

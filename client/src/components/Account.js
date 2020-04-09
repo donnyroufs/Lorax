@@ -13,7 +13,7 @@ const Account = () => {
       description: "There's currently no auth support.",
       status: "warning",
       duration: 5000,
-      isClosable: true
+      isClosable: true,
     });
   };
 
@@ -28,7 +28,7 @@ const Account = () => {
       ) : (
         <Button
           backgroundColor="dark"
-          borderRadius="full"
+          borderRadius="7px"
           outline="0"
           border="0"
           padding=".5rem 2rem"
@@ -36,6 +36,10 @@ const Account = () => {
           fontSize="sm"
           cursor="pointer"
           onClick={handleOnClick}
+          _hover={{
+            textDecor: "none",
+            opacity: ".8",
+          }}
         >
           Log In
         </Button>

@@ -36,6 +36,9 @@ const Header = () => {
           color="dark"
           letterSpacing={1.25}
           textDecoration="none"
+          _hover={{
+            textDecor: "none",
+          }}
         >
           {!isGuild &&
             guild
