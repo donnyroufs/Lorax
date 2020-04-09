@@ -7,7 +7,6 @@ import guildController from "./api/controllers/Guild.controller";
 
 (async () => {
   await server.start();
-  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === "prod") {
     await discord.start(() => {
       discord.client.on("message", async (message) => {

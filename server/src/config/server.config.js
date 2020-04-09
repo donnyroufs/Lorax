@@ -5,7 +5,7 @@ import apiRoutes from "../api/routes/index";
 
 export default {
   app: express(),
-  PORT: process.env.NODE_ENV === "prod" ? 3000 : 3000,
+  PORT: process.env.NODE_ENV === "prod" ? 3000 : 5000,
   setup() {
     this.app.use(cors());
     this.middleware();
@@ -18,7 +18,7 @@ export default {
     this.app.use("/", express.json());
   },
   routes() {
-	this.app.use("/api", apiRoutes);
+    this.app.use("/api", apiRoutes);
   },
   serve() {
     this.app.use(express.static(path.join("./client/build")));
@@ -32,5 +32,5 @@ export default {
     );
 
     this.setup();
-  }
+  },
 };
