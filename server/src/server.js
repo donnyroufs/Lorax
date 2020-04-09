@@ -7,40 +7,45 @@ import guildController from "./api/controllers/Guild.controller";
 
 (async () => {
   await server.start();
-  await discord.start(() => {
-    discord.client.on("message", async (message) => {
-      if (message.author.bot) return;
-      await handleCommands(discord.client, message);
-    });
-
-    // Handle new Guilds, Deleted Guilds
-    discord.client.on("guildCreate", async (event) => {
-      // generate avatar url
-      const icon = event.iconURL({
-        format: "webp",
+  console.log(process.env.NODE_ENV);
+  if (process.env.NODE_ENV === "prod") {
+    await discord.start(() => {
+      discord.client.on("message", async (message) => {
+        if (message.author.bot) return;
+        await handleCommands(discord.client, message);
       });
-      await guildController._create(event, icon);
-    });
 
-    discord.client.on("guildDelete", async (event) => {
-      await guildController._delete(event);
-    });
-
-    discord.client.on("guildUpdate", async (event) => {
-      // @BUG: The update event is "update" behind??.
-      const icon = event.iconURL({
-        format: "webp",
+      // Handle new Guilds, Deleted Guilds
+      discord.client.on("guildCreate", async (event) => {
+        // generate avatar url
+        const icon = event.iconURL({
+          format: "webp",
+        });
+        await guildController._create(event, icon);
       });
-      await guildController._update(event, icon);
-    });
 
-    console.log(`Registered Bots: ${discord.client.guilds.cache.size}`);
-  });
+      discord.client.on("guildDelete", async (event) => {
+        await guildController._delete(event);
+      });
+
+      discord.client.on("guildUpdate", async (event) => {
+        // @BUG: The update event is "update" behind??.
+        const icon = event.iconURL({
+          format: "webp",
+        });
+        await guildController._update(event, icon);
+      });
+
+      console.log(`Registered Bots: ${discord.client.guilds.cache.size}`);
+    });
+  }
 
   // Connects the database and syncs the models.
   models.sequelize.sync({ force: false }).then(() => {
     // @NOTE: This belongs somewhere else?
-    models.Question.addFullTextIndex();
+    if (process.env.NODE_ENV === "prod") {
+      models.Question.addFullTextIndex();
+    }
     models.sequelize
       .authenticate()
       .then(() => {
@@ -50,5 +55,8 @@ import guildController from "./api/controllers/Guild.controller";
         console.error("Unable to connect to the database:", err);
       });
   });
-  await loadCommands(discord.client);
+
+  if (process.env.NODE_ENV === "prod") {
+    await loadCommands(discord.client);
+  }
 })();
