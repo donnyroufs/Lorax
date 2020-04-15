@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button, useToast } from "@chakra-ui/core";
+import { Avatar, useToast, Link } from "@chakra-ui/core";
 
 const Account = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -26,7 +26,8 @@ const Account = () => {
           onClick={handleOnClick}
         />
       ) : (
-        <Button
+        <Link
+          href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=code&scope=identify"
           backgroundColor="dark"
           borderRadius="7px"
           outline="0"
@@ -35,14 +36,13 @@ const Account = () => {
           color="white"
           fontSize="sm"
           cursor="pointer"
-          onClick={handleOnClick}
           _hover={{
             textDecor: "none",
             opacity: ".8",
           }}
         >
           Log In
-        </Button>
+        </Link>
       )}
     </React.Fragment>
   );
