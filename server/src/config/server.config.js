@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import apiRoutes from "../api/routes/index";
+import passport from "passport";
+import session from "express-session";
 
 export default {
   app: express(),
@@ -16,6 +18,22 @@ export default {
   },
   middleware() {
     this.app.use("/", express.json());
+    passport.serializeUser(function (user, done) {
+      done(null, user);
+    });
+    passport.deserializeUser(function (obj, done) {
+      done(null, obj);
+    });
+
+    this.app.use(
+      session({
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: false,
+      })
+    );
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
   },
   routes() {
     this.app.use("/api", apiRoutes);

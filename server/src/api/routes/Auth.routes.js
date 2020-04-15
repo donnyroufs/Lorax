@@ -15,7 +15,7 @@ router.get(
 );
 
 router.get(
-  "/callback",
+  "/redirect",
   passport.authenticate("discord", { failureRedirect: "/" }),
   (req, res) => {
     res.send("This is the callback endpoint");
