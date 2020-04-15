@@ -18,22 +18,8 @@ export default {
   },
   middleware() {
     this.app.use("/", express.json());
-    passport.serializeUser(function (user, done) {
-      done(null, user);
-    });
-    passport.deserializeUser(function (obj, done) {
-      done(null, obj);
-    });
 
-    this.app.use(
-      session({
-        secret: "keyboard cat",
-        resave: false,
-        saveUninitialized: false,
-      })
-    );
     this.app.use(passport.initialize());
-    this.app.use(passport.session());
   },
   routes() {
     this.app.use("/api", apiRoutes);

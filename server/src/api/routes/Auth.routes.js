@@ -8,7 +8,7 @@ const scopes = ["identify"];
 
 router.get(
   "/",
-  passport.authenticate("discord", { scope: scopes }),
+  passport.authenticate("discord", { scope: scopes, session: false }),
   (req, res) => {
     res.send("hello world");
   }
@@ -16,9 +16,10 @@ router.get(
 
 router.get(
   "/redirect",
-  passport.authenticate("discord", { failureRedirect: "/" }),
+  passport.authenticate("discord", { failureRedirect: "/", session: false }),
   (req, res) => {
-    res.send("This is the callback endpoint");
+    // redirect to client, need to send cookies
+    res.redirect(process.env.BASE_PATH);
   }
 );
 
@@ -31,7 +32,9 @@ passport.use(
       scope: scopes,
     },
     (accessToken, refreshToken, profile, done) => {
-      process.nextTick(function () {
+      process.nextTick(() => {
+        // Create a profile if not exists
+        console.log(profile);
         return done(null, profile);
       });
     }
