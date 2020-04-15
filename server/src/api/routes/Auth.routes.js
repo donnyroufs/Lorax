@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { Strategy as DiscordStrategy } from "passport-discord";
+import controller from "../controllers/Auth.controller";
 
 const router = Router();
 
@@ -32,9 +33,13 @@ passport.use(
       scope: scopes,
     },
     (accessToken, refreshToken, profile, done) => {
-      process.nextTick(() => {
+      process.nextTick(async () => {
         // Create a profile if not exists
-        console.log(profile);
+        console.log("profile: ", profile);
+        console.log("accessToken: ", accessToken);
+        console.log("refreshToken: ", refreshToken);
+        // Check if the user exists in our database, else create the user.
+        await controller.findOrCreate(profile);
         return done(null, profile);
       });
     }

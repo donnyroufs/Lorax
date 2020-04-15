@@ -3,7 +3,6 @@ import cors from "cors";
 import path from "path";
 import apiRoutes from "../api/routes/index";
 import passport from "passport";
-import session from "express-session";
 
 export default {
   app: express(),
