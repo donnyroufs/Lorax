@@ -43,11 +43,7 @@ router.get(
     });
 
     // Create cookie for the refresh token and send along with the redirect
-    res.cookie("rtk", refreshToken, {
-      expires: new Date(Date.now() + oneWeek),
-      secure: false,
-      httpOnly: true,
-    });
+    controller.createCookie(res, refreshToken);
 
     // redirect to client with the accessToken
     res.redirect(`${process.env.BASE_PATH}?accessToken=${accessToken}`);

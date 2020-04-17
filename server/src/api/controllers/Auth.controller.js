@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 class AuthController {
   constructor(model) {
     this.model = model;
+    this.oneWeek = 7 * 24 * 3600 * 1000;
   }
 
   async findOrCreate({ id, username, avatar: _avatar }) {
@@ -37,6 +38,14 @@ class AuthController {
         ...options,
       });
     }
+  }
+
+  createCookie(res, refreshToken) {
+    res.cookie("rtk", refreshToken, {
+      expires: new Date(Date.now() + this.oneWeek),
+      secure: false, // https
+      httpOnly: true,
+    });
   }
 }
 
