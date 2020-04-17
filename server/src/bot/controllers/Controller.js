@@ -1,5 +1,4 @@
 import models from "../../api/models/index";
-import urlSlug from "url-slug";
 
 class Controller {
   constructor() {
@@ -12,8 +11,8 @@ class Controller {
         where: {
           id,
           username,
-          avatar
-        }
+          avatar,
+        },
       });
       return data;
     } catch (err) {

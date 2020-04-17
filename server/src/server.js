@@ -1,6 +1,6 @@
 import "dotenv/config";
 import models from "./api/models/index";
-import { server, discord } from "./config/index";
+import { server, discord, oauth } from "./config/index";
 import { loadCommands } from "./utils/loaders";
 import handleCommands from "./utils/handleCommands";
 import guildController from "./api/controllers/Guild.controller";
@@ -58,4 +58,6 @@ import guildController from "./api/controllers/Guild.controller";
   if (process.env.NODE_ENV === "prod") {
     await loadCommands(discord.client);
   }
+
+  oauth.setup();
 })();

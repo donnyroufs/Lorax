@@ -3,13 +3,15 @@ import guildReducer from "./guild.reducer";
 import questionsReducer from "./questions.reducer";
 import answersReducer from "./answer.reducer";
 import searchReducer from "./search.reducer";
+import authReducer from "./auth.reducer";
 
 // @REFACTOR: GUILD -> OVERVIEW
 const rootReducer = combineReducers({
   guild: guildReducer,
   questions: questionsReducer,
   answers: answersReducer,
-  search: searchReducer
+  search: searchReducer,
+  auth: authReducer,
 });
 
 export default rootReducer;
