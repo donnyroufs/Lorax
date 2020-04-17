@@ -1,6 +1,7 @@
 import models from "../models/index";
 import response from "../../utils/sendResponse";
 import fetch from "node-fetch";
+import FormData from "form-data";
 import jwt from "jsonwebtoken";
 
 class AuthController {
@@ -10,6 +11,7 @@ class AuthController {
     this.oneWeek = 7 * 24 * 3600 * 1000;
 
     this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
     this.getProfile = this.getProfile.bind(this);
   }
 
@@ -26,6 +28,29 @@ class AuthController {
       return data;
     } catch (err) {
       throw err;
+    }
+  }
+
+  async signOut(req, res) {
+    this.clearSession(req);
+
+    const decoded = this.decodeCookie(req);
+
+    if (!decoded) {
+      response(res, 401, {}, false);
+    }
+
+    const formData = this.appendFormData(decoded);
+
+    try {
+      await fetch(`${this.BASE_URL}/oauth2/token/revoke`, {
+        method: "POST",
+        body: formData,
+      });
+
+      response(res, 200, {});
+    } catch (err) {
+      response(res, 401, err.message, false);
     }
   }
 
@@ -100,6 +125,25 @@ class AuthController {
     const _accessToken = req.headers["authorization"];
     const accessToken = _accessToken.slice(7, _accessToken.length);
     return jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+  }
+
+  decodeCookie(req) {
+    return jwt.verify(req.cookies.rtk, process.env.REFRESH_TOKEN_SECRET);
+  }
+
+  clearSession(req) {
+    // Clear session
+    req.profile = null;
+    req.accessToken = null;
+    req.refreshToken = null;
+  }
+
+  appendFormData(decoded) {
+    const formData = new FormData();
+    formData.append("client_id", process.env.CLIENT_ID);
+    formData.append("client_secret", process.env.CLIENT_SECRET);
+    formData.append("token", decoded.refreshToken);
+    return formData;
   }
 }
 

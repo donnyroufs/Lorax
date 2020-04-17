@@ -16,42 +16,7 @@ const scopes = ["identify"];
 router.get("/", passport.authenticate("discord", { scope: scopes, session: false }));
 router.get("/redirect", passport.authenticate("discord", { failureRedirect: "/", session: false }), controller.signIn);
 router.get("/me", controller.getProfile);
-
-router.get("/logout", async (req, res) => {
-  // Clear session
-  req.profile = null;
-  req.accessToken = null;
-  req.refreshToken = null;
-
-  // Get token
-  const _accessToken = req.headers["authorization"];
-  const accessToken = _accessToken.slice(7, _accessToken.length);
-  // Decode
-  const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-
-  if (!decoded) {
-    sendResponse(res, 401, {}, false);
-  }
-
-  const decodedCookie = jwt.verify(req.cookies.rtk, process.env.REFRESH_TOKEN_SECRET);
-
-  const formData = new FormData();
-
-  formData.append("client_id", process.env.CLIENT_ID);
-  formData.append("client_secret", process.env.CLIENT_SECRET);
-  formData.append("token", decodedCookie.refreshToken);
-
-  try {
-    await fetch(`${BASE_URL}/oauth2/token/revoke`, {
-      method: "POST",
-      body: formData,
-    });
-
-    sendResponse(res, 200, {});
-  } catch (err) {
-    sendResponse(res, 401, err.message, false);
-  }
-});
+router.get("/logout", controller.signOut);
 
 // @TODO
 router.get("/refresh", async (req, res) => {
