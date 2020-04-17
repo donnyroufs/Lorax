@@ -3,14 +3,10 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 import { Strategy as DiscordStrategy } from "passport-discord";
 import controller from "../controllers/Auth.controller";
-import fetch from "node-fetch";
-import sendResponse from "../../utils/sendResponse";
 import refresh from "passport-oauth2-refresh";
-import FormData from "form-data";
 
 const router = Router();
 
-const BASE_URL = `https://discordapp.com/api`;
 const scopes = ["identify"];
 
 router.get("/", passport.authenticate("discord", { scope: scopes, session: false }));
@@ -18,25 +14,7 @@ router.get("/redirect", passport.authenticate("discord", { failureRedirect: "/",
 router.get("/me", controller.getProfile);
 router.get("/logout", controller.signOut);
 
-// @TODO
-router.get("/refresh", async (req, res) => {
-  // Get refreshToken
-  if (!req.cookies.rtk) {
-    sendResponse(res, 404, {}, false);
-  }
-
-  const decoded = jwt.verify(req.cookies.rtk, process.env.REFRESH_TOKEN_SECRET);
-
-  if (!decoded) {
-    sendResponse(res, 401, {}, false);
-  }
-
-  refresh.requestNewAccessToken("discord", decoded.refreshToken, (err, accessToken, refreshToken) => {
-    if (err) throw err;
-    console.log("access token: ", accessToken);
-    console.log("new refreshToken? :", refreshToken);
-  });
-});
+// @NOTE: refresh.requestNewAccessToken("discord") // from passport-oauth2-refresh
 
 const strategy = new DiscordStrategy(
   {
