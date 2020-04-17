@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "./components/Layout";
 import * as Page from "./pages";
 import { getGuilds } from "./redux/actions/guild.actions";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-/* eslint-disable */
+// import { getAccessToken } from "./redux/actions/auth.actions";
 
 function App() {
   const dispatch = useDispatch();
+  // const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     dispatch(getGuilds());

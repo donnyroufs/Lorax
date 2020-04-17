@@ -23,3 +23,8 @@ export const SET_QUERY = "SET_QUERY";
 export const NO_RESULTS = "NO_RESULTS";
 
 export const CLEAR_STATE = "CLEAR_STATE";
+
+// Authentication
+export const GET_PROFILE = "GET_PROFILE";
+export const SUCCESS_PROFILE = "SUCCESS_PROFILE";
+export const LOGGED_OUT = "LOGGED_OUT";

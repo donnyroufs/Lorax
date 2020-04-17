@@ -1,33 +1,76 @@
-import React, { useState } from "react";
-import { Avatar, useToast, Link } from "@chakra-ui/core";
+import React, { useRef } from "react";
+import {
+  Avatar,
+  Link,
+  Text,
+  Box,
+  useDisclosure,
+  Scale,
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogCloseButton,
+  AlertDialogOverlay,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  Button,
+} from "@chakra-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/actions/auth.actions";
 
 const Account = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const toast = useToast();
+  const dispatch = useDispatch();
+  const { username, avatar, isAuthenticated: isAuth } = useSelector(
+    (state) => state.auth
+  );
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleOnClick = () => {
-    setIsAuth(!isAuth);
-    toast({
-      position: "top",
-      title: "Warning",
-      description: "There's currently no auth support.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
+  const btnRef = useRef();
+
+  const onLogout = () => {
+    dispatch(logout());
+    onClose();
   };
 
   return (
     <React.Fragment>
       {isAuth ? (
-        <Avatar
-          name="Dan Abrahmov"
-          src="https://bit.ly/dan-abramov"
-          onClick={handleOnClick}
-        />
+        <React.Fragment>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Avatar
+              name={username}
+              src={avatar}
+              order="2"
+              cursor="pointer"
+              onClick={onOpen}
+            />
+            <Text order="1" mr="1rem">
+              {username}
+            </Text>
+          </Box>
+          <Scale in={isOpen}>
+            {(styles) => (
+              <AlertDialog
+                finalFocusRef={btnRef}
+                onClose={onClose}
+                isOpen={true}
+              >
+                <AlertDialogOverlay opacity={styles.opacity} />
+                <AlertDialogContent {...styles}>
+                  <AlertDialogHeader>Sign out?</AlertDialogHeader>
+                  <AlertDialogCloseButton />
+                  <AlertDialogFooter>
+                    <Button variantColor="red" ml={3} onClick={onLogout}>
+                      Log out
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
+          </Scale>
+        </React.Fragment>
       ) : (
         <Link
-          href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=code&scope=identify"
+          href="https://discordapp.com/api/oauth2/authorize?client_id=693407160725536810&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fapi%2Fauth%2Fredirect&response_type=code&scope=identify"
           backgroundColor="dark"
           borderRadius="7px"
           outline="0"
