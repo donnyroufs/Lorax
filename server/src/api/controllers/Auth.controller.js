@@ -5,7 +5,8 @@ class AuthController {
     this.model = model;
   }
 
-  async findOrCreate({ id, username, avatar }) {
+  async findOrCreate({ id, username, avatar: _avatar }) {
+    const avatar = this.makeAvatarURL(id, _avatar);
     try {
       const data = await this.model.findOrCreate({
         where: {
@@ -18,6 +19,10 @@ class AuthController {
     } catch (err) {
       throw err;
     }
+  }
+
+  makeAvatarURL(id, avatar) {
+    return `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
   }
 }
 

@@ -3,22 +3,23 @@ import cors from "cors";
 import path from "path";
 import apiRoutes from "../api/routes/index";
 import passport from "passport";
+import cookieParser from "cookie-parser";
 
 export default {
   app: express(),
-  PORT: process.env.NODE_ENV === "prod" ? 3000 : 5000,
+  PORT: process.env.NODE_ENV === "prod" ? 5000 : 5000,
   setup() {
     this.app.use(cors());
     this.middleware();
     this.routes();
-    if (process.env.NODE_ENV === "prod") {
+    if (process.env.NODE_ENV === "dev") {
       this.serve();
     }
   },
   middleware() {
     this.app.use("/", express.json());
-
     this.app.use(passport.initialize());
+    this.app.use(cookieParser());
   },
   routes() {
     this.app.use("/api", apiRoutes);
