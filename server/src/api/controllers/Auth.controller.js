@@ -1,4 +1,5 @@
 import models from "../models/index";
+import jwt from "jsonwebtoken";
 
 class AuthController {
   constructor(model) {
@@ -23,6 +24,19 @@ class AuthController {
 
   makeAvatarURL(id, avatar) {
     return `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+  }
+
+  generateToken(type, data, options = { expiresIn: "7d" }) {
+    if (type === "ACCESS") {
+      return jwt.sign({ ...data }, process.env.ACCESS_TOKEN_SECRET, {
+        ...options,
+      });
+    }
+    if (type === "REFRESH") {
+      return jwt.sign({ ...data }, process.env.REFRESH_TOKEN_SECRET, {
+        ...options,
+      });
+    }
   }
 }
 

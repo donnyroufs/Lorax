@@ -32,23 +32,15 @@ router.get(
     const oneWeek = 7 * 24 * 3600 * 1000;
 
     // Generate Access Token
-    const accessToken = jwt.sign(
-      {
-        id,
-        accessToken: req.accessToken,
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "7d" }
-    );
+    const accessToken = controller.generateToken("ACCESS", {
+      id,
+      accessToken: req.accessToken,
+    });
 
-    // Generate Refresh token
-    const refreshToken = jwt.sign(
-      { id, refreshToken: req.refreshToken },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
-        expiresIn: "7d",
-      }
-    );
+    const refreshToken = controller.generateToken("REFRESH", {
+      id,
+      refreshToken: req.refreshToken,
+    });
 
     // Create cookie for the refresh token and send along with the redirect
     res.cookie("rtk", refreshToken, {
