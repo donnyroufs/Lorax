@@ -7,12 +7,12 @@ import cookieParser from "cookie-parser";
 
 export default {
   app: express(),
-  PORT: process.env.NODE_ENV === "prod" ? 5000 : 5000,
+  PORT: process.env.NODE_ENV === "prod" ? 3000 : 5000,
   setup() {
     this.app.use(cors());
     this.middleware();
     this.routes();
-    if (process.env.NODE_ENV === "dev") {
+    if (process.env.NODE_ENV === "prod") {
       this.serve();
     }
   },
@@ -31,9 +31,7 @@ export default {
     });
   },
   async start() {
-    this.app.listen(this.PORT, () =>
-      console.log(`Server running on ${this.PORT}...`)
-    );
+    this.app.listen(this.PORT, () => console.log(`Server running on ${this.PORT}...`));
 
     this.setup();
   },
