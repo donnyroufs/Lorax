@@ -13,46 +13,9 @@ const router = Router();
 const BASE_URL = `https://discordapp.com/api`;
 const scopes = ["identify"];
 
-router.get(
-  "/",
-  passport.authenticate("discord", { scope: scopes, session: false })
-);
-
-router.get("/test", (req, res) => {
-  res.json({ data: req.headers["authorization"] });
-});
-
-router.get(
-  "/redirect",
-  passport.authenticate("discord", { failureRedirect: "/", session: false }),
-  controller.signIn
-);
-
-router.get("/me", async (req, res) => {
-  // Get token
-  const _accessToken = req.headers["authorization"];
-  const accessToken = _accessToken.slice(7, _accessToken.length);
-  // Decode
-  const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-  if (!decoded) {
-    sendResponse(res, 401, {}, false);
-  }
-
-  // Make a request to the discord api for the user information
-  const response = await fetch(`${BASE_URL}/users/@me`, {
-    headers: {
-      Authorization: `Bearer ${decoded.accessToken}`,
-    },
-  });
-  const data = await response.json();
-
-  // Send user information
-  sendResponse(res, 200, {
-    id: data.id,
-    username: data.username,
-    avatar: controller.makeAvatarURL(data.id, data.avatar),
-  });
-});
+router.get("/", passport.authenticate("discord", { scope: scopes, session: false }));
+router.get("/redirect", passport.authenticate("discord", { failureRedirect: "/", session: false }), controller.signIn);
+router.get("/me", controller.getProfile);
 
 router.get("/logout", async (req, res) => {
   // Clear session
@@ -70,10 +33,7 @@ router.get("/logout", async (req, res) => {
     sendResponse(res, 401, {}, false);
   }
 
-  const decodedCookie = jwt.verify(
-    req.cookies.rtk,
-    process.env.REFRESH_TOKEN_SECRET
-  );
+  const decodedCookie = jwt.verify(req.cookies.rtk, process.env.REFRESH_TOKEN_SECRET);
 
   const formData = new FormData();
 
@@ -106,15 +66,11 @@ router.get("/refresh", async (req, res) => {
     sendResponse(res, 401, {}, false);
   }
 
-  refresh.requestNewAccessToken(
-    "discord",
-    decoded.refreshToken,
-    (err, accessToken, refreshToken) => {
-      if (err) throw err;
-      console.log("access token: ", accessToken);
-      console.log("new refreshToken? :", refreshToken);
-    }
-  );
+  refresh.requestNewAccessToken("discord", decoded.refreshToken, (err, accessToken, refreshToken) => {
+    if (err) throw err;
+    console.log("access token: ", accessToken);
+    console.log("new refreshToken? :", refreshToken);
+  });
 });
 
 const strategy = new DiscordStrategy(
