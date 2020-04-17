@@ -5,6 +5,8 @@ class AuthController {
   constructor(model) {
     this.model = model;
     this.oneWeek = 7 * 24 * 3600 * 1000;
+
+    this.signIn = this.signIn.bind(this);
   }
 
   async findOrCreate({ id, username, avatar: _avatar }) {
@@ -21,6 +23,26 @@ class AuthController {
     } catch (err) {
       throw err;
     }
+  }
+
+  async signIn(req, res) {
+    const { id } = req.user;
+    // Generate Access Token
+    const accessToken = this.generateToken("ACCESS", {
+      id,
+      accessToken: req.accessToken,
+    });
+
+    const refreshToken = this.generateToken("REFRESH", {
+      id,
+      refreshToken: req.refreshToken,
+    });
+
+    // Create cookie for the refresh token and send along with the redirect
+    this.createCookie(res, refreshToken);
+
+    // redirect to client with the accessToken
+    res.redirect(`${process.env.BASE_PATH}?accessToken=${accessToken}`);
   }
 
   makeAvatarURL(id, avatar) {

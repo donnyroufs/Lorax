@@ -25,29 +25,7 @@ router.get("/test", (req, res) => {
 router.get(
   "/redirect",
   passport.authenticate("discord", { failureRedirect: "/", session: false }),
-  (req, res) => {
-    // Create JWT
-    const { username, avatar, id, ...rest } = req.user;
-
-    const oneWeek = 7 * 24 * 3600 * 1000;
-
-    // Generate Access Token
-    const accessToken = controller.generateToken("ACCESS", {
-      id,
-      accessToken: req.accessToken,
-    });
-
-    const refreshToken = controller.generateToken("REFRESH", {
-      id,
-      refreshToken: req.refreshToken,
-    });
-
-    // Create cookie for the refresh token and send along with the redirect
-    controller.createCookie(res, refreshToken);
-
-    // redirect to client with the accessToken
-    res.redirect(`${process.env.BASE_PATH}?accessToken=${accessToken}`);
-  }
+  controller.signIn
 );
 
 router.get("/me", async (req, res) => {
