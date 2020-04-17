@@ -97,7 +97,7 @@ class AuthController {
   }
 
   makeAvatarURL(id, avatar) {
-    return `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+    return `https://cdn.discordapp.com/avatars/${id}/${avatar}.webp`;
   }
 
   generateToken(type, data, options = { expiresIn: "7d" }) {
